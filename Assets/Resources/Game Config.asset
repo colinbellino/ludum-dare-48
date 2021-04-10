@@ -13,119 +13,6 @@ MonoBehaviour:
   m_Name: Game Config
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 4641049481721966404, guid: 59f9ad7a458b4844e9ac659f97fe6cc4, type: 3}
-  HelperPrefab: {fileID: 4641049481721966404, guid: 970cb09ee206e9942ba9b69884a8b6f9, type: 3}
-  DefaultProjectilePrefab: {fileID: 2322674617563913610, guid: 7220f06d60796dd45b11a42858fd38a3, type: 3}
-  Waves:
-  - Spawns:
-    - Position: {x: 0, y: 2}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d382ce520e6d21641b1264655066cf76, type: 3}
-  - Spawns:
-    - Position: {x: -16, y: 9}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d382ce520e6d21641b1264655066cf76, type: 3}
-    - Position: {x: 16, y: 9}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d382ce520e6d21641b1264655066cf76, type: 3}
-  - Spawns:
-    - Position: {x: -16, y: 9}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 0, y: 9}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 16, y: 9}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-  - Spawns:
-    - Position: {x: -8, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 581d5d8e77a86bf4184d95ce7bca49aa, type: 3}
-    - Position: {x: 8, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 581d5d8e77a86bf4184d95ce7bca49aa, type: 3}
-  - Spawns:
-    - Position: {x: -9, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: 0, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: 9, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-  - Spawns:
-    - Position: {x: -12, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: -4, y: 2}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 4, y: 2}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 12, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: -7, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: 7, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-  - Spawns:
-    - Position: {x: -12, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: -4, y: 2}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 4, y: 2}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 12, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: -7, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 7, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 9, y: 6}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-    - Position: {x: 9, y: 6}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-  - Spawns:
-    - Position: {x: -12, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: 12, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: -7, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: 7, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: d25d48f1b32a0074faf110eb329802d3, type: 3}
-    - Position: {x: 9, y: 6}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 0e32ce7e953cc994a9b00cddd4ea9034, type: 3}
-  - Spawns:
-    - Position: {x: -5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-    - Position: {x: 5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-  - Spawns:
-    - Position: {x: -9, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: 9, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: -5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: 5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: -9, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: 9, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-  - Spawns:
-    - Position: {x: -5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: 5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: -9, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: 9, y: 4}
-      EntityPrefab: {fileID: 4246819502291371097, guid: 14da29968323e0f4c9827e94462d3698, type: 3}
-    - Position: {x: -5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-    - Position: {x: 5, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-  - Spawns:
-    - Position: {x: -10, y: 5}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-    - Position: {x: 10, y: 5}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-    - Position: {x: -5, y: 5}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-    - Position: {x: 5, y: 5}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
-    - Position: {x: 0, y: 0}
-      EntityPrefab: {fileID: 4246819502291371097, guid: f03a0974aaedcad4d822c93cfe058575, type: 3}
   AudioMixer: {fileID: 24100000, guid: c00711887b3714031932c58a1ac16396, type: 2}
   MusicAudioMixerGroup: {fileID: -1804572004088458924, guid: c00711887b3714031932c58a1ac16396, type: 2}
   SoundsAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}
@@ -134,9 +21,6 @@ MonoBehaviour:
   MainMusic: {fileID: 8300000, guid: 3901573ea068d7e418fa631f32900a5c, type: 3}
   HelpReceivedMusic: {fileID: 8300000, guid: f80df30193093cc45865957ade46d5c1, type: 3}
   MenuTextAppearClip: {fileID: 8300000, guid: 0716cfff5c54dd542a774a3995d00888, type: 3}
-  MenuConfirmClip: {fileID: 8300000, guid: 4c1368389c5532e4faa388da887d74e9, type: 3}
+  MenuConfirmClip: {fileID: 8300000, guid: 94bbe3167a496134e8575a15ebef6826, type: 3}
   MusicVolume: 0.8
   SoundVolume: 1
-  GroundCheckMask:
-    serializedVersion: 2
-    m_Bits: 64
