@@ -13,10 +13,11 @@ namespace Game.Core
 		{
 			await base.Enter();
 
-			_ui.SetDebugText(@"State: Gameplay\n
-			- F1: Trigger win condition\n
-			- F2: Trigger defeat condition\n");
+			_ui.SetDebugText(@"State: Gameplay
+- F1: Trigger win condition
+- F2: Trigger defeat condition");
 			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, Vector3.zero);
+			GameObject.Find("parallax_mockup").SetActive(true);
 
 			await _ui.FadeOut();
 
@@ -45,6 +46,8 @@ namespace Game.Core
 			await base.Exit();
 
 			_ui.HideGameplay();
+			GameObject.Destroy(_state.Player);
+			GameObject.Find("parallax_mockup").SetActive(false);
 
 			_controls.Gameplay.Disable();
 		}

@@ -99,8 +99,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1463812865
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -273,32 +273,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b32a4c2b6ee44e49038a42c0a97d614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireRate: 0.1
+  BaseHealth: 3
   MoveSpeed: 10
-  RotateSpeed: 4
-  StartingHealth: 3
   Alliance: 1
   Brain: 0
-  RotationPerTick: {x: 0, y: 0, z: 0}
-  InvulnerabilityDuration: 0.3
-  Parts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   FireClip: {fileID: 8300000, guid: 4170a33209a5a3e4d983f445b66c5c4e, type: 3}
   DamagedClip: {fileID: 8300000, guid: 02c5a8f2e04749e4cb09137a46ec41f6, type: 3}
   DestroyedClip: {fileID: 8300000, guid: fc2193c73482093459c07f2c7b440a57, type: 3}
-  DestroyedParticle: {fileID: 8076680327023155674, guid: 75d0571da6981574e9d2c3f3137d00db, type: 3}
   Rigidbody: {fileID: 0}
-  GroundCheckCollider: {fileID: 3622635288531360535}
-  Name: 
-  Health: 1
-  RotationOffset: 0
-  CanFireTimestamp: 0
-  MoveDestination: {x: 0, y: 0, z: 0}
-  HelperIndex: 0
-  HelperAngle: 0
-  InvulnerabilityTimestamp: 0
-  Velocity: {x: 0, y: 0, z: 0}
-  GravityModifier: 1
-  IsJumping: 0
+  CurrentHealth: 0

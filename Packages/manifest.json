@@ -2,6 +2,7 @@
   "dependencies": {
     "com.cysharp.unitask": "2.2.5",
     "com.demigiant.dotween": "1.2.42",
+    "com.unity.2d.psdimporter": "4.0.2",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.2d.tilemap.extras": "1.6.4-preview",

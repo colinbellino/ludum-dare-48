@@ -1,12 +1,9 @@
 # Disable EOL conversions by default
 * -text
-
 ## Unity ##
-
 *.cs diff=csharp text
 *.cginc text
 *.shader text
-
 *.mat merge=unityyamlmerge
 *.anim merge=unityyamlmerge
 *.unity merge=unityyamlmerge
@@ -16,10 +13,7 @@
 *.asset merge=unityyamlmerge
 *.meta merge=unityyamlmerge
 *.controller merge=unityyamlmerge
-
-
 ## git-lfs ##
-
 #Image
 *.jpg filter=lfs diff=lfs merge=lfs
 *.jpeg filter=lfs diff=lfs merge=lfs
@@ -29,22 +23,18 @@
 *.ai filter=lfs diff=lfs merge=lfs
 *.au filter=lfs diff=lfs merge=lfs
 *.ase filter=lfs diff=lfs merge=lfs
-
 #Audio
 *.mp3 filter=lfs diff=lfs merge=lfs
 *.wav filter=lfs diff=lfs merge=lfs
 *.ogg filter=lfs diff=lfs merge=lfs
-
 #Video
 *.mp4 filter=lfs diff=lfs merge=lfs
 *.mov filter=lfs diff=lfs merge=lfs
-
 #3D Object
 *.FBX filter=lfs diff=lfs merge=lfs
 *.fbx filter=lfs diff=lfs merge=lfs
 *.blend filter=lfs diff=lfs merge=lfs
 *.obj filter=lfs diff=lfs merge=lfs
-
 #ETC
 *.a filter=lfs diff=lfs merge=lfs
 *.exr filter=lfs diff=lfs merge=lfs
@@ -58,9 +48,9 @@
 *.rns filter=lfs diff=lfs merge=lfs
 *.reason filter=lfs diff=lfs merge=lfs
 *.lxo filter=lfs diff=lfs merge=lfs
-
 *.asset linguist-generated
 *.mat linguist-generated
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
+*.psb filter=lfs diff=lfs merge=lfs -text
