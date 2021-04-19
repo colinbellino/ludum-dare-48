@@ -19,7 +19,10 @@ namespace Game.Core
 - F1: Trigger win condition
 - F2: Trigger defeat condition");
 			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, Vector3.zero);
-			_state.Background = GameObject.Find("parallax_mockup");
+			if (_state.Background == null)
+			{
+				_state.Background = GameObject.Find("parallax_mockup");
+			}
 			_state.Background.SetActive(true);
 			_controls.Gameplay.Enable();
 
