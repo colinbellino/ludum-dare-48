@@ -15,7 +15,6 @@ namespace Game.Core
 		public AudioMixerSnapshot DefaultAudioSnapshot;
 		public AudioMixerSnapshot PauseAudioSnapshot;
 		public AudioClip MainMusic;
-		public AudioClip HelpReceivedMusic;
 		public AudioClip MenuTextAppearClip;
 		public AudioClip MenuConfirmClip;
 		[Range(0f, 1f)] public float MusicVolume = 1f;

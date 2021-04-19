@@ -18,13 +18,14 @@ namespace Game.Core
 
 		public static bool IsDevBuild()
 		{
-#if UNITY_EDITOR
 			return true;
-#endif
+			// #if UNITY_EDITOR
+			// 			return true;
+			// #endif
 
-#pragma warning disable 162
-			return false;
-#pragma warning restore 162
+			// #pragma warning disable 162
+			// 			return false;
+			// #pragma warning restore 162
 		}
 
 		public static Vector3 GetMouseWorldPosition(GameControls controls, Camera camera)

@@ -13,15 +13,19 @@ namespace Game.Core
 		{
 			await base.Enter();
 
+			await _ui.FadeIn(Color.black);
+
 			_ui.SetDebugText(@"State: Gameplay
 - F1: Trigger win condition
 - F2: Trigger defeat condition");
 			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, Vector3.zero);
-			GameObject.Find("parallax_mockup").SetActive(true);
+			_state.Background = GameObject.Find("parallax_mockup");
+			_state.Background.SetActive(true);
+			_controls.Gameplay.Enable();
+
+			_ = _audioPlayer.PlayMusic(_config.MainMusic);
 
 			await _ui.FadeOut();
-
-			_controls.Gameplay.Enable();
 		}
 
 		public override void Tick()
@@ -39,6 +43,16 @@ namespace Game.Core
 					Defeat();
 				}
 			}
+
+			if (_state.Player != null)
+			{
+				var speed = 5f;
+				var moveInput = _controls.Gameplay.Move.ReadValue<Vector2>();
+				var position = _state.Player.transform.position;
+				position.x += moveInput.x * Time.deltaTime * speed;
+				position.y += moveInput.y * Time.deltaTime * speed;
+				_state.Player.transform.position = position;
+			}
 		}
 
 		public override async UniTask Exit()
@@ -46,8 +60,8 @@ namespace Game.Core
 			await base.Exit();
 
 			_ui.HideGameplay();
-			GameObject.Destroy(_state.Player);
-			GameObject.Find("parallax_mockup").SetActive(false);
+			GameObject.Destroy(_state.Player.gameObject);
+			_state.Background.SetActive(false);
 
 			_controls.Gameplay.Disable();
 		}
