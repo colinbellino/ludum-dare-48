@@ -664,7 +664,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 120
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 49 copy
@@ -692,7 +692,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 60
     mosaicPosition: {x: 0, y: 0}
   - name: Sea spray
@@ -706,7 +706,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 62
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 7
@@ -734,7 +734,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 58
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 33
@@ -797,7 +797,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 111
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 45
@@ -811,7 +811,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 113
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 44
@@ -825,7 +825,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 109
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 25
@@ -839,7 +839,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 102
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 47 copy
@@ -853,7 +853,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 100
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 48 copy
@@ -867,7 +867,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 107
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 46
@@ -881,7 +881,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 105
     mosaicPosition: {x: 0, y: 0}
   - name: fin1
@@ -895,7 +895,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 116
     mosaicPosition: {x: 0, y: 0}
   - name: Color Lookup 1
