@@ -24,6 +24,9 @@ namespace Game.Core
 			_state.Player.Controller.onTriggerEnterEvent += OnPlayerTriggerEnter;
 			_state.Player.Controller.onTriggerExitEvent += OnPlayerTriggerExit;
 
+			_camera.VirtualCamera.Follow = _state.Player.transform;
+			_camera.Confiner.m_BoundingShape2D = GetLevelConfiner();
+
 			_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, new Vector3(0, 12f, 0));
 
 			_controls.Gameplay.Enable();
@@ -178,6 +181,10 @@ namespace Game.Core
 
 		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
 
+		private Collider2D GetLevelConfiner()
+		{
+			return GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
+		}
 
 		private async void Victory()
 		{

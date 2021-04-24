@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Game.Inputs;
+﻿using Game.Inputs;
 
 namespace Game.Core
 {
@@ -8,7 +6,7 @@ namespace Game.Core
 	{
 		public GameConfig Config;
 		public GameUI UI;
-		public Camera Camera;
+		public CameraRig Camera;
 		public GameControls Controls;
 		public GameState State;
 		public AudioPlayer AudioPlayer;
