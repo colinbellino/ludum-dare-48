@@ -14,16 +14,18 @@ namespace Game.Core
 			var config = Resources.Load<GameConfig>("Game Config");
 			var camera = Camera.main;
 			var ui = FindObjectOfType<GameUI>();
+			var cameraRig = FindObjectOfType<CameraRig>();
 
 			Assert.IsNotNull(config);
 			Assert.IsNotNull(musicAudioSource);
 			Assert.IsNotNull(camera);
 			Assert.IsNotNull(ui);
+			Assert.IsNotNull(cameraRig);
 
 			Game = new Game();
 			Game.Config = config;
 			Game.Controls = new GameControls();
-			Game.Camera = Camera.main;
+			Game.Camera = cameraRig;
 			Game.UI = ui;
 			Game.State = new GameState();
 			Game.AudioPlayer = new AudioPlayer(config, musicAudioSource);

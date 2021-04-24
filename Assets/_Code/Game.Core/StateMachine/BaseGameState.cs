@@ -11,7 +11,7 @@ namespace Game.Core
 
 		protected GameConfig _config => _game.Config;
 		protected GameUI _ui => _game.UI;
-		protected Camera _camera => _game.Camera;
+		protected CameraRig _camera => _game.Camera;
 		protected GameControls _controls => _game.Controls;
 		protected GameState _state => _game.State;
 		protected AudioPlayer _audioPlayer => _game.AudioPlayer;
