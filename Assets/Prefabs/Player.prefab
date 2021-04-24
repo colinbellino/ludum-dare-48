@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1797277663993602690}
   - component: {fileID: 8620751440432435348}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4993173109994224701}
   - component: {fileID: 8282211760201272051}
   - component: {fileID: 2164958312634949877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -200,7 +200,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -214,7 +214,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.61, y: 0.84}
   m_EdgeRadius: 0
 --- !u!50 &8282211760201272051
 Rigidbody2D:
@@ -235,7 +235,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &2164958312634949877
 MonoBehaviour:
@@ -253,10 +253,10 @@ MonoBehaviour:
   _skinWidth: 0.02
   platformMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1
   triggerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
