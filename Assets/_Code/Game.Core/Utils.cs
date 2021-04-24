@@ -9,7 +9,7 @@ namespace Game.Core
 		public static EntityComponent SpawnPlayer(EntityComponent prefab, Game game, Vector3 position)
 		{
 			var entity = GameObject.Instantiate(prefab, position, Quaternion.identity);
-			// entity.transform.name = "Player";
+			entity.transform.name = "Player";
 			// entity.StateMachine = new UnitStateMachine(false, game, entity);
 			// await entity.StateMachine.Start();
 			return entity;
@@ -18,7 +18,7 @@ namespace Game.Core
 		public static EntityComponent SpawnWallOfDeath(EntityComponent prefab, Game game, Vector3 position)
 		{
 			var entity = GameObject.Instantiate(prefab, position, Quaternion.identity);
-			// entity.transform.name = "Wall of Death";
+			entity.transform.name = "Wall of Death";
 			// entity.StateMachine = new UnitStateMachine(false, game, entity);
 			// await entity.StateMachine.Start();
 			return entity;

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 4641049481721966404, guid: 59f9ad7a458b4844e9ac659f97fe6cc4, type: 3}
   WallOfDeathPrefab: {fileID: -2534250066095687303, guid: a971576391850224db49fe7182193c17, type: 3}
+  Levels:
+  - Level1
+  - Level2
   AudioMixer: {fileID: 24100000, guid: c00711887b3714031932c58a1ac16396, type: 2}
   MusicAudioMixerGroup: {fileID: -1804572004088458924, guid: c00711887b3714031932c58a1ac16396, type: 2}
   SoundsAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}
