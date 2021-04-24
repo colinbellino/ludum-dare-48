@@ -30,7 +30,8 @@ namespace Game.Core
 	{
 		public string SceneName;
 		public AudioClip Music;
-		public Vector3 PlayerStartPosition = new Vector3(-12f, 8f, 0);
+		// public Vector3 PlayerStartPosition = new Vector3(-12f, 8f, 0);
 		public Vector3 WallOfDeathStartPosition = new Vector3(0, 12f, 0);
+		public bool Safe;
 	}
 }

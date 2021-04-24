@@ -762,7 +762,7 @@ MonoBehaviour:
   Controller: {fileID: 7740252584435824294}
   Animator: {fileID: 0}
   Gravity: -25
-  RunSpeed: 1
+  RunSpeed: 2
   GroundDamping: 20
   InAirDamping: 5
   JumpHeight: 3

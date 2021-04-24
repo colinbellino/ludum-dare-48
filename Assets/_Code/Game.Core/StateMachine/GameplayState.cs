@@ -18,9 +18,7 @@ namespace Game.Core
 
 			await _ui.FadeIn(Color.black);
 
-			_ui.SetDebugText(@"State: Gameplay
-- F1: Trigger win condition
-- F2: Trigger defeat condition");
+			_ui.SetDebugText("State: Gameplay\n\n[DEBUG MENU]\n- F1: Jump to next level\n- F2: Trigger game over");
 
 			if (_state.CurrentLevel == null)
 			{
@@ -36,14 +34,17 @@ namespace Game.Core
 			_camera.VirtualCamera.Follow = _state.Player.transform;
 			_camera.Confiner.m_BoundingShape2D = level.CameraConfiner;
 
-			_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, level.WallOfDeathStartPosition);
+			if (_state.CurrentLevel.Safe == false)
+			{
+				_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, level.WallOfDeathStartPosition);
+			}
 
 			_controls.Gameplay.Enable();
 			_controls.Gameplay.Confirm.started += ConfirmStarted;
 
 			_state.Running = true;
 
-			_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music);
+			_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music, true, 1f);
 			await _ui.FadeOut();
 		}
 
@@ -158,8 +159,13 @@ namespace Game.Core
 			await base.Exit();
 
 			_ui.HideGameplay();
+
 			GameObject.Destroy(_state.Player.gameObject);
-			GameObject.Destroy(_state.WallOfDeath.gameObject);
+
+			if (_state.WallOfDeath)
+			{
+				GameObject.Destroy(_state.WallOfDeath.gameObject);
+			}
 
 			_controls.Gameplay.Disable();
 			_controls.Gameplay.Confirm.started -= ConfirmStarted;
@@ -191,7 +197,7 @@ namespace Game.Core
 			var index = System.Array.IndexOf(_config.Levels, _state.CurrentLevel);
 			if (index < _config.Levels.Length - 1)
 			{
-				_ = _audioPlayer.StopMusic();
+				_ = _audioPlayer.StopMusic(1f);
 				await _ui.FadeIn(Color.black);
 				_ = UnloadLevel(_state.CurrentLevel);
 
@@ -201,7 +207,7 @@ namespace Game.Core
 			}
 			else
 			{
-				_ = _audioPlayer.StopMusic();
+				_ = _audioPlayer.StopMusic(1f);
 				await _ui.FadeIn(Color.white);
 				_ = UnloadLevel(_state.CurrentLevel);
 
@@ -211,8 +217,8 @@ namespace Game.Core
 
 		private async void Defeat()
 		{
+			_ = _audioPlayer.StopMusic(0.5f);
 			await _ui.FadeIn(Color.black);
-			_ = _audioPlayer.StopMusic();
 
 			_machine.Fire(GameFSM.Triggers.Defeat);
 		}
@@ -222,7 +228,7 @@ namespace Game.Core
 			await SceneManager.LoadSceneAsync(data.SceneName, LoadSceneMode.Additive);
 
 			var level = new LevelScene();
-			level.PlayerStartPosition = data.PlayerStartPosition;
+			level.PlayerStartPosition = GameObject.Find("Player Start").transform.position;
 			level.WallOfDeathStartPosition = data.WallOfDeathStartPosition;
 			level.CameraConfiner = GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
 
