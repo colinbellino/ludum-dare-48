@@ -20,23 +20,27 @@ namespace Game.Core
 			_ui.SetDebugText(@"State: Gameplay
 - F1: Trigger win condition
 - F2: Trigger defeat condition");
-			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, new Vector3(-12f, 12f, 0));
+			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, new Vector3(-12f, 8f, 0));
+			_state.Player.Controller.onTriggerEnterEvent += OnPlayerTriggerEnter;
+			_state.Player.Controller.onTriggerExitEvent += OnPlayerTriggerExit;
+
+			_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, new Vector3(0, 12f, 0));
+
 			_controls.Gameplay.Enable();
 			_controls.Gameplay.Confirm.started += ConfirmStarted;
 
 			_ = _audioPlayer.PlayMusic(_config.MainMusic);
 
+			_state.Running = true;
+
 			await _ui.FadeOut();
 		}
-
-		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
 
 		public override void Tick()
 		{
 			base.Tick();
 
 			var moveInput = _controls.Gameplay.Move.ReadValue<Vector2>();
-			var confirmInput = _controls.Gameplay.Confirm.ReadValue<float>();
 
 			if (IsDevBuild())
 			{
@@ -50,77 +54,89 @@ namespace Game.Core
 				}
 			}
 
-			if (_state.Player != null)
+			if (_state.Running)
 			{
-				var player = _state.Player;
-				if (player.Controller.isGrounded)
+				if (_state.WallOfDeath != null)
 				{
-					player.Velocity.y = 0;
+					var entity = _state.WallOfDeath;
+
+					entity.Velocity.y = -entity.RunSpeed;
+					entity.Controller.move(entity.Velocity * Time.deltaTime);
 				}
 
-				if (moveInput.x > 0f)
+				if (_state.Player != null)
 				{
-					player.NormalizedHorizontalSpeed = 1;
-					if (player.transform.localScale.x < 0f)
+					var entity = _state.Player;
+
+					if (entity.Controller.isGrounded)
 					{
-						player.transform.localScale = new Vector3(-player.transform.localScale.x, player.transform.localScale.y, player.transform.localScale.z);
+						entity.Velocity.y = 0;
 					}
 
-					if (player.Controller.isGrounded)
+					if (moveInput.x > 0f)
 					{
-						player.Animator.Play(Animator.StringToHash("Run"));
+						entity.NormalizedHorizontalSpeed = 1;
+						if (entity.transform.localScale.x < 0f)
+						{
+							entity.transform.localScale = new Vector3(-entity.transform.localScale.x, entity.transform.localScale.y, entity.transform.localScale.z);
+						}
+
+						if (entity.Controller.isGrounded)
+						{
+							entity.Animator?.Play(Animator.StringToHash("Run"));
+						}
 					}
+					else if (moveInput.x < 0f)
+					{
+						entity.NormalizedHorizontalSpeed = -1;
+						if (entity.transform.localScale.x > 0f)
+						{
+							entity.transform.localScale = new Vector3(-entity.transform.localScale.x, entity.transform.localScale.y, entity.transform.localScale.z);
+						}
+
+						if (entity.Controller.isGrounded)
+						{
+							entity.Animator?.Play(Animator.StringToHash("Run"));
+						}
+					}
+					else
+					{
+						entity.NormalizedHorizontalSpeed = 0;
+
+						if (entity.Controller.isGrounded)
+						{
+							entity.Animator?.Play(Animator.StringToHash("Idle"));
+						}
+					}
+
+
+					// we can only jump whilst grounded
+					if (entity.Controller.isGrounded && _confirmWasPressedThisFrame)
+					{
+						entity.Velocity.y = Mathf.Sqrt(2f * entity.JumpHeight * -entity.Gravity);
+						entity.Animator?.Play(Animator.StringToHash("Jump"));
+					}
+
+					// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+					var smoothedMovementFactor = entity.Controller.isGrounded ? entity.GroundDamping : entity.InAirDamping; // how fast do we change direction?
+					entity.Velocity.x = Mathf.Lerp(entity.Velocity.x, entity.NormalizedHorizontalSpeed * entity.RunSpeed, Time.deltaTime * smoothedMovementFactor);
+
+					// apply gravity before moving
+					entity.Velocity.y += entity.Gravity * Time.deltaTime;
+
+					// // if holding down bump up our movement amount and turn off one way platform detection for a frame.
+					// // this lets us jump down through one way platforms
+					// if (entity.Controller.isGrounded && moveInput.y < 0f)
+					// {
+					// 	entity.Velocity.y *= 3f;
+					// 	entity.Controller.ignoreOneWayPlatformsThisFrame = true;
+					// }
+
+					entity.Controller.move(entity.Velocity * Time.deltaTime);
+
+					// grab our current entity.Velocity to use as a base for all calculations
+					entity.Velocity = entity.Controller.velocity;
 				}
-				else if (moveInput.x < 0f)
-				{
-					player.NormalizedHorizontalSpeed = -1;
-					if (player.transform.localScale.x > 0f)
-					{
-						player.transform.localScale = new Vector3(-player.transform.localScale.x, player.transform.localScale.y, player.transform.localScale.z);
-					}
-
-					if (player.Controller.isGrounded)
-					{
-						player.Animator.Play(Animator.StringToHash("Run"));
-					}
-				}
-				else
-				{
-					player.NormalizedHorizontalSpeed = 0;
-
-					if (player.Controller.isGrounded)
-					{
-						player.Animator.Play(Animator.StringToHash("Idle"));
-					}
-				}
-
-
-				// we can only jump whilst grounded
-				if (player.Controller.isGrounded && _confirmWasPressedThisFrame)
-				{
-					player.Velocity.y = Mathf.Sqrt(2f * player.JumpHeight * -player.Gravity);
-					player.Animator.Play(Animator.StringToHash("Jump"));
-				}
-
-				// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-				var smoothedMovementFactor = player.Controller.isGrounded ? player.GroundDamping : player.InAirDamping; // how fast do we change direction?
-				player.Velocity.x = Mathf.Lerp(player.Velocity.x, player.NormalizedHorizontalSpeed * player.RunSpeed, Time.deltaTime * smoothedMovementFactor);
-
-				// apply gravity before moving
-				player.Velocity.y += player.Gravity * Time.deltaTime;
-
-				// // if holding down bump up our movement amount and turn off one way platform detection for a frame.
-				// // this lets us jump down through one way platforms
-				// if (player.Controller.isGrounded && moveInput.y < 0f)
-				// {
-				// 	player.Velocity.y *= 3f;
-				// 	player.Controller.ignoreOneWayPlatformsThisFrame = true;
-				// }
-
-				player.Controller.move(player.Velocity * Time.deltaTime);
-
-				// grab our current player.Velocity to use as a base for all calculations
-				player.Velocity = player.Controller.velocity;
 			}
 
 			_confirmWasPressedThisFrame = false;
@@ -132,10 +148,36 @@ namespace Game.Core
 
 			_ui.HideGameplay();
 			GameObject.Destroy(_state.Player.gameObject);
+			GameObject.Destroy(_state.WallOfDeath.gameObject);
 
 			_controls.Gameplay.Disable();
 			_controls.Gameplay.Confirm.started -= ConfirmStarted;
 		}
+
+		private async void OnPlayerTriggerEnter(Collider2D col)
+		{
+			Debug.Log("OnPlayerTriggerEnter: " + col.gameObject.name);
+
+			if (col.gameObject.tag == "Killbox")
+			{
+				await _ui.FadeIn(Color.black);
+				_machine.Fire(GameFSM.Triggers.Defeat);
+			}
+			else if (col.gameObject.tag == "Exit")
+			{
+				await _ui.FadeIn(Color.white);
+				_machine.Fire(GameFSM.Triggers.Victory);
+			}
+
+		}
+
+		private void OnPlayerTriggerExit(Collider2D col)
+		{
+			// Debug.Log("OnPlayerTriggerExit: " + col.gameObject.name);
+		}
+
+		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
+
 
 		private async void Victory()
 		{

@@ -7,6 +7,7 @@ namespace Game.Core
 	public class GameConfig : ScriptableObject
 	{
 		public EntityComponent PlayerPrefab;
+		public EntityComponent WallOfDeathPrefab;
 
 		[Header("Audio")]
 		public AudioMixer AudioMixer;
