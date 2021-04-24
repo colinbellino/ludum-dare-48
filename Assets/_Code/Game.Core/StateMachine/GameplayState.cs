@@ -20,7 +20,7 @@ namespace Game.Core
 			_ui.SetDebugText(@"State: Gameplay
 - F1: Trigger win condition
 - F2: Trigger defeat condition");
-			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, new Vector3(0f, 12f, 0));
+			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, new Vector3(-12f, 12f, 0));
 			_controls.Gameplay.Enable();
 			_controls.Gameplay.Confirm.started += ConfirmStarted;
 
