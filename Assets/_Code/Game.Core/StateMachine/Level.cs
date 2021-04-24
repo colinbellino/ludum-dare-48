@@ -4,7 +4,7 @@ namespace Game.Core
 {
 	public partial class GameplayState
 	{
-		private class Level
+		private class LevelScene
 		{
 			public Vector3 PlayerStartPosition;
 			public Vector3 WallOfDeathStartPosition;

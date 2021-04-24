@@ -41,11 +41,9 @@ namespace Game.Core
 			_controls.Gameplay.Enable();
 			_controls.Gameplay.Confirm.started += ConfirmStarted;
 
-			// TODO: Load music track from level config
-			_ = _audioPlayer.PlayMusic(_config.MainMusic);
-
 			_state.Running = true;
 
+			_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music);
 			await _ui.FadeOut();
 		}
 
@@ -173,27 +171,11 @@ namespace Game.Core
 
 			if (col.gameObject.tag == "Killbox")
 			{
-				await _ui.FadeIn(Color.black);
-				_machine.Fire(GameFSM.Triggers.Defeat);
+				Defeat();
 			}
 			else if (col.gameObject.tag == "Exit")
 			{
-				var index = System.Array.IndexOf(_config.Levels, _state.CurrentLevel);
-				if (index < _config.Levels.Length - 1)
-				{
-					var previousLevel = _state.CurrentLevel;
-					_state.CurrentLevel = _config.Levels[index + 1];
-
-					await _ui.FadeIn(Color.black);
-					await UnloadLevel(previousLevel);
-					_machine.Fire(GameFSM.Triggers.NextLevel);
-				}
-				else
-				{
-					await _ui.FadeIn(Color.white);
-					await UnloadLevel(_state.CurrentLevel);
-					_machine.Fire(GameFSM.Triggers.Victory);
-				}
+				await Victory();
 			}
 		}
 
@@ -204,33 +186,52 @@ namespace Game.Core
 
 		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
 
-		private async void Victory()
+		private async UniTask Victory()
 		{
-			await _ui.FadeIn(Color.white);
-			_machine.Fire(GameFSM.Triggers.Victory);
+			var index = System.Array.IndexOf(_config.Levels, _state.CurrentLevel);
+			if (index < _config.Levels.Length - 1)
+			{
+				_ = _audioPlayer.StopMusic();
+				await _ui.FadeIn(Color.black);
+				_ = UnloadLevel(_state.CurrentLevel);
+
+				_machine.Fire(GameFSM.Triggers.NextLevel);
+
+				_state.CurrentLevel = _config.Levels[index + 1];
+			}
+			else
+			{
+				_ = _audioPlayer.StopMusic();
+				await _ui.FadeIn(Color.white);
+				_ = UnloadLevel(_state.CurrentLevel);
+
+				_machine.Fire(GameFSM.Triggers.Victory);
+			}
 		}
 
 		private async void Defeat()
 		{
 			await _ui.FadeIn(Color.black);
+			_ = _audioPlayer.StopMusic();
+
 			_machine.Fire(GameFSM.Triggers.Defeat);
 		}
 
-		private async UniTask<Level> LoadLevel(string levelName)
+		private async UniTask<LevelScene> LoadLevel(Level data)
 		{
-			await SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
+			await SceneManager.LoadSceneAsync(data.SceneName, LoadSceneMode.Additive);
 
-			var level = new Level();
-			level.PlayerStartPosition = new Vector3(-12f, 8f, 0);
-			level.WallOfDeathStartPosition = new Vector3(0, 12f, 0);
+			var level = new LevelScene();
+			level.PlayerStartPosition = data.PlayerStartPosition;
+			level.WallOfDeathStartPosition = data.WallOfDeathStartPosition;
 			level.CameraConfiner = GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
 
 			return level;
 		}
 
-		private async UniTask UnloadLevel(string levelName)
+		private async UniTask UnloadLevel(Level level)
 		{
-			await SceneManager.UnloadSceneAsync(levelName);
+			await SceneManager.UnloadSceneAsync(level.SceneName);
 		}
 	}
 }

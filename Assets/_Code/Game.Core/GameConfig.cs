@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Audio;
 
 namespace Game.Core
@@ -9,7 +10,7 @@ namespace Game.Core
 		public EntityComponent PlayerPrefab;
 		public EntityComponent WallOfDeathPrefab;
 
-		public string[] Levels;
+		public Level[] Levels;
 
 		[Header("Audio")]
 		public AudioMixer AudioMixer;
@@ -22,5 +23,14 @@ namespace Game.Core
 		public AudioClip MenuConfirmClip;
 		[Range(0f, 1f)] public float MusicVolume = 1f;
 		[Range(0f, 1f)] public float SoundVolume = 1f;
+	}
+
+	[Serializable]
+	public class Level
+	{
+		public string SceneName;
+		public AudioClip Music;
+		public Vector3 PlayerStartPosition = new Vector3(-12f, 8f, 0);
+		public Vector3 WallOfDeathStartPosition = new Vector3(0, 12f, 0);
 	}
 }

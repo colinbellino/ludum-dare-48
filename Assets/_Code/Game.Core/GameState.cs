@@ -6,7 +6,7 @@ namespace Game.Core
 	{
 		public EntityComponent Player;
 		public EntityComponent WallOfDeath;
-		public string CurrentLevel;
+		public Level CurrentLevel;
 
 		public bool Running;
 	}
