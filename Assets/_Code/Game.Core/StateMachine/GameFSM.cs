@@ -8,7 +8,7 @@ namespace Game.Core
 	public class GameFSM
 	{
 		public enum States { Bootstrap, Gameplay, Victory, Defeat, Quit }
-		public enum Triggers { Done, Victory, Defeat, Retry, Quit }
+		public enum Triggers { Done, Victory, Defeat, Retry, NextLevel, Quit }
 
 		private readonly bool _debug;
 		private readonly Dictionary<States, IState> _states;
@@ -37,7 +37,8 @@ namespace Game.Core
 
 			_machine.Configure(States.Gameplay)
 				.Permit(Triggers.Victory, States.Victory)
-				.Permit(Triggers.Defeat, States.Defeat);
+				.Permit(Triggers.Defeat, States.Defeat)
+				.PermitReentry(Triggers.NextLevel);
 
 			_machine.Configure(States.Victory)
 				.Permit(Triggers.Retry, States.Gameplay)

@@ -9,6 +9,8 @@ namespace Game.Core
 		public EntityComponent PlayerPrefab;
 		public EntityComponent WallOfDeathPrefab;
 
+		public string[] Levels;
+
 		[Header("Audio")]
 		public AudioMixer AudioMixer;
 		public AudioMixerGroup MusicAudioMixerGroup;

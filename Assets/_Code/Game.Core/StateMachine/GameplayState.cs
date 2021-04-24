@@ -1,11 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static Game.Core.Utils;
 
 namespace Game.Core
 {
-	public class GameplayState : BaseGameState
+	public partial class GameplayState : BaseGameState
 	{
 		private bool _confirmWasPressedThisFrame;
 
@@ -20,18 +21,27 @@ namespace Game.Core
 			_ui.SetDebugText(@"State: Gameplay
 - F1: Trigger win condition
 - F2: Trigger defeat condition");
-			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, new Vector3(-12f, 8f, 0));
+
+			if (_state.CurrentLevel == null)
+			{
+				_state.CurrentLevel = _config.Levels[0];
+			}
+
+			var level = await LoadLevel(_state.CurrentLevel);
+
+			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, level.PlayerStartPosition);
 			_state.Player.Controller.onTriggerEnterEvent += OnPlayerTriggerEnter;
 			_state.Player.Controller.onTriggerExitEvent += OnPlayerTriggerExit;
 
 			_camera.VirtualCamera.Follow = _state.Player.transform;
-			_camera.Confiner.m_BoundingShape2D = GetLevelConfiner();
+			_camera.Confiner.m_BoundingShape2D = level.CameraConfiner;
 
-			_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, new Vector3(0, 12f, 0));
+			_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, level.WallOfDeathStartPosition);
 
 			_controls.Gameplay.Enable();
 			_controls.Gameplay.Confirm.started += ConfirmStarted;
 
+			// TODO: Load music track from level config
 			_ = _audioPlayer.PlayMusic(_config.MainMusic);
 
 			_state.Running = true;
@@ -159,7 +169,7 @@ namespace Game.Core
 
 		private async void OnPlayerTriggerEnter(Collider2D col)
 		{
-			Debug.Log("OnPlayerTriggerEnter: " + col.gameObject.name);
+			// Debug.Log("OnPlayerTriggerEnter: " + col.gameObject.name);
 
 			if (col.gameObject.tag == "Killbox")
 			{
@@ -168,10 +178,23 @@ namespace Game.Core
 			}
 			else if (col.gameObject.tag == "Exit")
 			{
-				await _ui.FadeIn(Color.white);
-				_machine.Fire(GameFSM.Triggers.Victory);
-			}
+				var index = System.Array.IndexOf(_config.Levels, _state.CurrentLevel);
+				if (index < _config.Levels.Length - 1)
+				{
+					var previousLevel = _state.CurrentLevel;
+					_state.CurrentLevel = _config.Levels[index + 1];
 
+					await _ui.FadeIn(Color.black);
+					await UnloadLevel(previousLevel);
+					_machine.Fire(GameFSM.Triggers.NextLevel);
+				}
+				else
+				{
+					await _ui.FadeIn(Color.white);
+					await UnloadLevel(_state.CurrentLevel);
+					_machine.Fire(GameFSM.Triggers.Victory);
+				}
+			}
 		}
 
 		private void OnPlayerTriggerExit(Collider2D col)
@@ -180,11 +203,6 @@ namespace Game.Core
 		}
 
 		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
-
-		private Collider2D GetLevelConfiner()
-		{
-			return GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
-		}
 
 		private async void Victory()
 		{
@@ -196,6 +214,23 @@ namespace Game.Core
 		{
 			await _ui.FadeIn(Color.black);
 			_machine.Fire(GameFSM.Triggers.Defeat);
+		}
+
+		private async UniTask<Level> LoadLevel(string levelName)
+		{
+			await SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
+
+			var level = new Level();
+			level.PlayerStartPosition = new Vector3(-12f, 8f, 0);
+			level.WallOfDeathStartPosition = new Vector3(0, 12f, 0);
+			level.CameraConfiner = GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
+
+			return level;
+		}
+
+		private async UniTask UnloadLevel(string levelName)
+		{
+			await SceneManager.UnloadSceneAsync(levelName);
 		}
 	}
 }
