@@ -10,7 +10,6 @@ namespace Game.Core
 		{
 			var entity = GameObject.Instantiate(prefab, position, Quaternion.identity);
 			entity.transform.name = "Player";
-			entity.CurrentHealth = entity.BaseHealth;
 			// entity.StateMachine = new UnitStateMachine(false, game, entity);
 			// await entity.StateMachine.Start();
 			return entity;
@@ -18,14 +17,13 @@ namespace Game.Core
 
 		public static bool IsDevBuild()
 		{
+#if UNITY_EDITOR
 			return true;
-			// #if UNITY_EDITOR
-			// 			return true;
-			// #endif
+#endif
 
-			// #pragma warning disable 162
-			// 			return false;
-			// #pragma warning restore 162
+#pragma warning disable 162
+			return false;
+#pragma warning restore 162
 		}
 
 		public static Vector3 GetMouseWorldPosition(GameControls controls, Camera camera)
