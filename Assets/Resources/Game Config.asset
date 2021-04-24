@@ -19,7 +19,7 @@ MonoBehaviour:
   SoundsAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}
   DefaultAudioSnapshot: {fileID: 24500006, guid: c00711887b3714031932c58a1ac16396, type: 2}
   PauseAudioSnapshot: {fileID: 6893898828190700123, guid: c00711887b3714031932c58a1ac16396, type: 2}
-  MainMusic: {fileID: 8300000, guid: 871a2e9a0219c3047aa0bd802a25c98c, type: 3}
+  MainMusic: {fileID: 8300000, guid: ba8edf71bca5f3e4c82ae7e42d11ffe2, type: 3}
   MenuTextAppearClip: {fileID: 8300000, guid: 0716cfff5c54dd542a774a3995d00888, type: 3}
   MenuConfirmClip: {fileID: 8300000, guid: 94bbe3167a496134e8575a15ebef6826, type: 3}
   MusicVolume: 0.8
