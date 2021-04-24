@@ -36,7 +36,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "669a3815-aef5-4946-be49-29496bd995fc",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -47,14 +47,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=1)"
-                },
-                {
-                    "name": "ConfirmPress",
-                    "type": "Button",
-                    "id": "423e6e66-ff79-4c86-b6a3-08fb760f8c8f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
                 },
                 {
                     "name": "Cancel",
@@ -186,6 +178,28 @@
                 },
                 {
                     "name": "",
+                    "id": "a39df26b-6651-4c3f-88be-c8e511601704",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7f7b802-cf08-49f6-8a44-bc6cb299f425",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4aeb101d-00ce-4fa7-a979-342d991139cc",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
@@ -197,8 +211,8 @@
                 },
                 {
                     "name": "",
-                    "id": "d38506b6-e33f-4398-872a-09e2318b55b4",
-                    "path": "<Mouse>/leftButton",
+                    "id": "ffdd3a0d-6e79-4f95-87cc-594d5383470f",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -208,8 +222,8 @@
                 },
                 {
                     "name": "",
-                    "id": "ffdd3a0d-6e79-4f95-87cc-594d5383470f",
-                    "path": "<Keyboard>/space",
+                    "id": "f1581f41-0e70-44de-8588-c537f0e78dba",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -241,45 +255,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a5fe9d13-93e2-4c8c-8c11-61d8f5435865",
-                    "path": "<Mouse>/rightButton",
+                    "id": "fa0bc75b-21a3-47a1-a01c-283b43ed7bd3",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "59439cc3-7da9-433c-a406-4469cab503bb",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ConfirmPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b34a233c-c4a6-445d-85ec-586663ca5bbb",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ConfirmPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a6e27f53-8782-405b-8f65-2ac05d70cf46",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ConfirmPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
