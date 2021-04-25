@@ -27,6 +27,13 @@ MonoBehaviour:
     Music: {fileID: 8300000, guid: 95472d7248b32f6429d78bbbd10c3131, type: 3}
     WallOfDeathStartPosition: {x: 0, y: 12, z: 0}
     Safe: 0
+  Tiles:
+  - Tile: {fileID: 11400000, guid: 3f6005317d8cd6b48b0720dc85694feb, type: 2}
+    Breakable: 0
+    HitsToBreak: 0
+  - Tile: {fileID: 11400000, guid: c6d95d8109b62314d9545b0967282db4, type: 2}
+    Breakable: 1
+    HitsToBreak: 3
   AudioMixer: {fileID: 24100000, guid: c00711887b3714031932c58a1ac16396, type: 2}
   MusicAudioMixerGroup: {fileID: -1804572004088458924, guid: c00711887b3714031932c58a1ac16396, type: 2}
   SoundsAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}

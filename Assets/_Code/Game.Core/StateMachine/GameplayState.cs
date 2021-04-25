@@ -26,6 +26,8 @@ namespace Game.Core
 
 			_level = await LoadLevel(_state.CurrentLevel);
 
+			_state.TileHits.Clear();
+
 			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, _level.PlayerStartPosition);
 			_state.Player.Controller.onTriggerEnterEvent += OnPlayerTriggerEnter;
 			_state.Player.Controller.onTriggerExitEvent += OnPlayerTriggerExit;
@@ -88,9 +90,34 @@ namespace Game.Core
 
 					if (entity.Controller.isGrounded && _cancelWasPressedThisFrame)
 					{
-						UnityEngine.Debug.Log("dig");
-						_level.PlatformTilemap.SetTile(digPosition, null);
-						entity.Animator?.Play(Animator.StringToHash("Dig"));
+						var tile = _level.PlatformTilemap.GetTile(digPosition);
+						var tileData = GetTileData(_config.Tiles, tile);
+
+						if (tileData != null)
+						{
+							if (tileData.Breakable)
+							{
+								if (_state.TileHits.ContainsKey(digPosition) == false)
+								{
+									_state.TileHits[digPosition] = tileData.HitsToBreak;
+								}
+
+								// TODO: change tile depending on remaining hits
+								_state.TileHits[digPosition] -= _state.GauntlerPower;
+
+								if (_state.TileHits[digPosition] <= 0)
+								{
+									_level.PlatformTilemap.SetTile(digPosition, null);
+								}
+							}
+							else
+							{
+								// TODO: play cling sound
+							}
+
+							// TODO: play dig sound
+							entity.Animator?.Play(Animator.StringToHash("Dig"));
+						}
 					}
 
 					if (entity.Controller.isGrounded)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Core
 {
@@ -7,7 +8,8 @@ namespace Game.Core
 		public EntityComponent Player;
 		public EntityComponent WallOfDeath;
 		public Level CurrentLevel;
-
+		public Dictionary<Vector3Int, int> TileHits = new Dictionary<Vector3Int, int>();
+		public int GauntlerPower = 1;
 		public bool Running;
 	}
 }
