@@ -24,6 +24,12 @@ namespace Game.Core
 
 			_ui.SetDebugText("State: Gameplay\n\n[DEBUG MENU]\n- F1: Jump to next level\n- F2: Trigger game over");
 
+			if (IsDevBuild() == false)
+			{
+				Object.Destroy(GameObject.Find("Player Cursor"));
+				Object.Destroy(GameObject.Find("Dig Cursor"));
+			}
+
 			_level = await LoadLevel(_state.CurrentLevel);
 
 			_state.TileHits.Clear();
@@ -85,8 +91,11 @@ namespace Game.Core
 					var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
 					var digPosition = entityPosition + _digDirection;
 
-					GameObject.Find("Player Cursor").transform.position = entityPosition;
-					GameObject.Find("Dig Cursor").transform.position = digPosition;
+					if (IsDevBuild())
+					{
+						GameObject.Find("Player Cursor").transform.position = entityPosition;
+						GameObject.Find("Dig Cursor").transform.position = digPosition;
+					}
 
 					if (entity.Controller.isGrounded && _cancelWasPressedThisFrame)
 					{
@@ -102,8 +111,15 @@ namespace Game.Core
 									_state.TileHits[digPosition] = tileData.HitsToBreak;
 								}
 
-								// TODO: change tile depending on remaining hits
 								_state.TileHits[digPosition] -= _state.GauntlerPower;
+
+								var damageTile = _state.TileHits[digPosition] switch
+								{
+									2 => _config.DamageOverlays[1],
+									1 => _config.DamageOverlays[0],
+									_ => null
+								};
+								_level.OverlayTilemap.SetTile(digPosition, damageTile);
 
 								if (_state.TileHits[digPosition] <= 0)
 								{
@@ -202,11 +218,11 @@ namespace Game.Core
 
 			_level = null;
 
-			GameObject.Destroy(_state.Player.gameObject);
+			Object.Destroy(_state.Player.gameObject);
 
 			if (_state.WallOfDeath)
 			{
-				GameObject.Destroy(_state.WallOfDeath.gameObject);
+				Object.Destroy(_state.WallOfDeath.gameObject);
 			}
 
 			_controls.Gameplay.Disable();
@@ -279,6 +295,7 @@ namespace Game.Core
 			level.WallOfDeathStartPosition = data.WallOfDeathStartPosition;
 			level.CameraConfiner = GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
 			level.PlatformTilemap = GameObject.Find("Platform").GetComponent<Tilemap>();
+			level.OverlayTilemap = GameObject.Find("Overlay").GetComponent<Tilemap>();
 
 			return level;
 		}

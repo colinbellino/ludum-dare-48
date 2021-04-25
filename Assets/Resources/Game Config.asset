@@ -34,6 +34,10 @@ MonoBehaviour:
   - Tile: {fileID: 11400000, guid: c6d95d8109b62314d9545b0967282db4, type: 2}
     Breakable: 1
     HitsToBreak: 3
+  DamageOverlays:
+  - {fileID: 11400000, guid: e1a3f25c53872ea46ac46f8e06a904df, type: 2}
+  - {fileID: 11400000, guid: 2cdaca25ca0dda64f90f78d520f7e4fc, type: 2}
+  - {fileID: 11400000, guid: 5871b654944e4f74cb25881223ebdac3, type: 2}
   AudioMixer: {fileID: 24100000, guid: c00711887b3714031932c58a1ac16396, type: 2}
   MusicAudioMixerGroup: {fileID: -1804572004088458924, guid: c00711887b3714031932c58a1ac16396, type: 2}
   SoundsAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}
