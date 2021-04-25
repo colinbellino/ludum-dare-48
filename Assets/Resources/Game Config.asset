@@ -35,7 +35,13 @@ MonoBehaviour:
   - Tile: {fileID: 11400000, guid: 3f6005317d8cd6b48b0720dc85694feb, type: 2}
     Breakable: 0
     HitsToBreak: 0
+  - Tile: {fileID: 11400000, guid: 4c6a97854c0d37441844edbe56e4ebdc, type: 2}
+    Breakable: 0
+    HitsToBreak: 0
   - Tile: {fileID: 11400000, guid: c6d95d8109b62314d9545b0967282db4, type: 2}
+    Breakable: 1
+    HitsToBreak: 3
+  - Tile: {fileID: 11400000, guid: c1307eae14c99b9479afb47da74819f4, type: 2}
     Breakable: 1
     HitsToBreak: 3
   DamageOverlays:
