@@ -15,13 +15,17 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 4641049481721966404, guid: 59f9ad7a458b4844e9ac659f97fe6cc4, type: 3}
   WallOfDeathPrefab: {fileID: -2534250066095687303, guid: a971576391850224db49fe7182193c17, type: 3}
   Levels:
+  - SceneName: Intro
+    Music: {fileID: 8300000, guid: 48037ba22283ce54ba2177d6278e8622, type: 3}
+    WallOfDeathStartPosition: {x: 0, y: 0, z: 0}
+    Safe: 1
   - SceneName: Level1
     Music: {fileID: 8300000, guid: 918ce2171e16a22429295bbc445daa90, type: 3}
     WallOfDeathStartPosition: {x: 0, y: 12, z: 0}
     Safe: 0
   - SceneName: Safe1
     Music: {fileID: 8300000, guid: 48037ba22283ce54ba2177d6278e8622, type: 3}
-    WallOfDeathStartPosition: {x: 0, y: 12, z: 0}
+    WallOfDeathStartPosition: {x: 0, y: 0, z: 0}
     Safe: 1
   - SceneName: Level2
     Music: {fileID: 8300000, guid: 95472d7248b32f6429d78bbbd10c3131, type: 3}
