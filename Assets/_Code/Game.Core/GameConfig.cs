@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Tilemaps;
 
 namespace Game.Core
 {
@@ -11,6 +12,7 @@ namespace Game.Core
 		public EntityComponent WallOfDeathPrefab;
 
 		public Level[] Levels;
+		public TileData[] Tiles;
 
 		[Header("Audio")]
 		public AudioMixer AudioMixer;
@@ -30,8 +32,15 @@ namespace Game.Core
 	{
 		public string SceneName;
 		public AudioClip Music;
-		// public Vector3 PlayerStartPosition = new Vector3(-12f, 8f, 0);
 		public Vector3 WallOfDeathStartPosition = new Vector3(0, 12f, 0);
 		public bool Safe;
+	}
+
+	[Serializable]
+	public class TileData
+	{
+		public TileBase Tile;
+		public bool Breakable;
+		public int HitsToBreak = 3;
 	}
 }

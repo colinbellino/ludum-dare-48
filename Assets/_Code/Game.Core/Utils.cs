@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Game.Inputs;
+using UnityEngine.Tilemaps;
 
 namespace Game.Core
 {
@@ -22,6 +23,19 @@ namespace Game.Core
 			// entity.StateMachine = new UnitStateMachine(false, game, entity);
 			// await entity.StateMachine.Start();
 			return entity;
+		}
+
+		public static TileData GetTileData(TileData[] tiles, TileBase tile)
+		{
+			for (int tileIndex = 0; tileIndex < tiles.Length; tileIndex++)
+			{
+				if (tiles[tileIndex].Tile == tile)
+				{
+					return tiles[tileIndex];
+				}
+			}
+
+			return null;
 		}
 
 		public static bool IsDevBuild()
