@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using System.Collections;
 using static Game.Core.Utils;
 
 namespace Game.Core
@@ -26,8 +27,8 @@ namespace Game.Core
 
 			if (IsDevBuild() == false)
 			{
-				Object.Destroy(GameObject.Find("Player Cursor"));
-				Object.Destroy(GameObject.Find("Dig Cursor"));
+				GameObject.Destroy(GameObject.Find("Player Cursor"));
+				GameObject.Destroy(GameObject.Find("Dig Cursor"));
 			}
 
 			_level = await LoadLevel(_state.CurrentLevel);
@@ -98,92 +99,75 @@ namespace Game.Core
 						GameObject.Find("Dig Cursor").transform.position = digPosition;
 					}
 
-					if (entity.Controller.isGrounded && _cancelWasPressedThisFrame)
-					{
-						var tile = _level.PlatformTilemap.GetTile(digPosition);
-						var tileData = GetTileData(_config.Tiles, tile);
-
-						if (tileData != null)
-						{
-							if (tileData.Breakable)
-							{
-								if (_state.TileHits.ContainsKey(digPosition) == false)
-								{
-									_state.TileHits[digPosition] = tileData.HitsToBreak;
-								}
-
-								_state.TileHits[digPosition] -= _state.GauntlerPower;
-
-								var damageTile = _state.TileHits[digPosition] switch
-								{
-									3 => _config.DamageOverlays[0],
-									2 => _config.DamageOverlays[1],
-									1 => _config.DamageOverlays[2],
-									_ => null
-								};
-								_level.OverlayTilemap.SetTile(digPosition, damageTile);
-
-								if (_state.TileHits[digPosition] <= 0)
-								{
-									_level.PlatformTilemap.SetTile(digPosition, null);
-								}
-							}
-							else
-							{
-								// TODO: play cling sound
-							}
-
-							// TODO: play dig sound
-							entity.Animator?.Play(Animator.StringToHash("Dig"));
-						}
-					}
-
 					if (entity.Controller.isGrounded)
 					{
 						entity.Velocity.y = 0;
 					}
 
-					if (moveInput.x > 0f)
+					if (Time.time >= entity.AnimationEndTimestamp)
 					{
-						entity.NormalizedHorizontalSpeed = 1;
-						if (entity.transform.localScale.x < 0f)
+						if (moveInput.x > 0f)
 						{
-							entity.transform.localScale = new Vector3(-entity.transform.localScale.x, entity.transform.localScale.y, entity.transform.localScale.z);
+							entity.NormalizedHorizontalSpeed = 1;
+							if (entity.transform.localScale.x < 0f)
+							{
+								entity.transform.localScale = new Vector3(-entity.transform.localScale.x, entity.transform.localScale.y, entity.transform.localScale.z);
+							}
+
+							if (entity.Controller.isGrounded)
+							{
+								entity.Animator?.Play(Animator.StringToHash("Run"));
+							}
+						}
+						else if (moveInput.x < 0f)
+						{
+							entity.NormalizedHorizontalSpeed = -1;
+							if (entity.transform.localScale.x > 0f)
+							{
+								entity.transform.localScale = new Vector3(-entity.transform.localScale.x, entity.transform.localScale.y, entity.transform.localScale.z);
+							}
+
+							if (entity.Controller.isGrounded)
+							{
+								entity.Animator?.Play(Animator.StringToHash("Run"));
+							}
+						}
+						else
+						{
+							entity.NormalizedHorizontalSpeed = 0;
+
+							if (entity.Controller.isGrounded)
+							{
+								entity.Animator?.Play(Animator.StringToHash("Idle"));
+							}
 						}
 
-						if (entity.Controller.isGrounded)
+						// JUMP
+						if (_confirmWasPressedThisFrame && entity.Controller.isGrounded)
 						{
-							entity.Animator?.Play(Animator.StringToHash("Run"));
+							entity.Velocity.y = Mathf.Sqrt(2f * entity.JumpHeight * -entity.Gravity);
+							entity.Animator?.Play(Animator.StringToHash("Jump"));
+						}
+
+						// DIG
+						if (_cancelWasPressedThisFrame && entity.Controller.isGrounded)
+						{
+							var tile = _level.PlatformTilemap.GetTile(digPosition);
+							var tileData = GetTileData(_config.Tiles, tile);
+
+							if (tileData != null)
+							{
+								entity.Animator?.Play(Animator.StringToHash("Dig Down"));
+								entity.StartDiggingTimestamp = Time.time + 0.2f;
+								entity.AnimationEndTimestamp = Time.time + 0.3f;
+							}
 						}
 					}
-					else if (moveInput.x < 0f)
-					{
-						entity.NormalizedHorizontalSpeed = -1;
-						if (entity.transform.localScale.x > 0f)
-						{
-							entity.transform.localScale = new Vector3(-entity.transform.localScale.x, entity.transform.localScale.y, entity.transform.localScale.z);
-						}
 
-						if (entity.Controller.isGrounded)
-						{
-							entity.Animator?.Play(Animator.StringToHash("Run"));
-						}
-					}
-					else
+					if (Time.time >= entity.StartDiggingTimestamp && entity.StartDiggingTimestamp > 0)
 					{
-						entity.NormalizedHorizontalSpeed = 0;
-
-						if (entity.Controller.isGrounded)
-						{
-							entity.Animator?.Play(Animator.StringToHash("Idle"));
-						}
-					}
-
-					// we can only jump whilst grounded
-					if (entity.Controller.isGrounded && _confirmWasPressedThisFrame)
-					{
-						entity.Velocity.y = Mathf.Sqrt(2f * entity.JumpHeight * -entity.Gravity);
-						entity.Animator?.Play(Animator.StringToHash("Jump"));
+						entity.StartDiggingTimestamp = 0;
+						DigTile(entity);
 					}
 
 					// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
@@ -192,14 +176,6 @@ namespace Game.Core
 
 					// apply gravity before moving
 					entity.Velocity.y += entity.Gravity * Time.deltaTime;
-
-					// // if holding down bump up our movement amount and turn off one way platform detection for a frame.
-					// // this lets us jump down through one way platforms
-					// if (entity.Controller.isGrounded && moveInput.y < 0f)
-					// {
-					// 	entity.Velocity.y *= 3f;
-					// 	entity.Controller.ignoreOneWayPlatformsThisFrame = true;
-					// }
 
 					entity.Controller.move(entity.Velocity * Time.deltaTime);
 
@@ -220,16 +196,55 @@ namespace Game.Core
 
 			_level = null;
 
-			Object.Destroy(_state.Player.gameObject);
+			GameObject.Destroy(_state.Player.gameObject);
 
 			if (_state.WallOfDeath)
 			{
-				Object.Destroy(_state.WallOfDeath.gameObject);
+				GameObject.Destroy(_state.WallOfDeath.gameObject);
 			}
 
 			_controls.Gameplay.Disable();
 			_controls.Gameplay.Confirm.started -= ConfirmStarted;
 			_controls.Gameplay.Cancel.started -= CancelStarted;
+		}
+
+		private void DigTile(EntityComponent entity)
+		{
+			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
+			var digPosition = entityPosition + _digDirection;
+
+			var tile = _level.PlatformTilemap.GetTile(digPosition);
+			var tileData = GetTileData(_config.Tiles, tile);
+
+			if (tileData.Breakable)
+			{
+				if (_state.TileHits.ContainsKey(digPosition) == false)
+				{
+					_state.TileHits[digPosition] = tileData.HitsToBreak;
+				}
+
+				_state.TileHits[digPosition] -= _state.GauntlerPower;
+
+				var damageTile = _state.TileHits[digPosition] switch
+				{
+					3 => _config.DamageOverlays[0],
+					2 => _config.DamageOverlays[1],
+					1 => _config.DamageOverlays[2],
+					_ => null
+				};
+				_level.OverlayTilemap.SetTile(digPosition, damageTile);
+
+				if (_state.TileHits[digPosition] <= 0)
+				{
+					_level.PlatformTilemap.SetTile(digPosition, null);
+				}
+
+				_audioPlayer.PlayRandomSoundEffect(_config.DigClips);
+			}
+			else
+			{
+				_audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
+			}
 		}
 
 		private async void OnPlayerTriggerEnter(Collider2D col)
