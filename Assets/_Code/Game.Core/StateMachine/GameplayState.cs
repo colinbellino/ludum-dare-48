@@ -115,8 +115,9 @@ namespace Game.Core
 
 								var damageTile = _state.TileHits[digPosition] switch
 								{
+									3 => _config.DamageOverlays[0],
 									2 => _config.DamageOverlays[1],
-									1 => _config.DamageOverlays[0],
+									1 => _config.DamageOverlays[2],
 									_ => null
 								};
 								_level.OverlayTilemap.SetTile(digPosition, damageTile);
