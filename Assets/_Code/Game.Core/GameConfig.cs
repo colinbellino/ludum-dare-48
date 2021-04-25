@@ -13,6 +13,7 @@ namespace Game.Core
 
 		public Level[] Levels;
 		public TileData[] Tiles;
+		public TileBase[] DamageOverlays;
 
 		[Header("Audio")]
 		public AudioMixer AudioMixer;

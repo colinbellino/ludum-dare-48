@@ -9,5 +9,6 @@ namespace Game.Core
 		public Vector3 WallOfDeathStartPosition;
 		public Collider2D CameraConfiner;
 		public Tilemap PlatformTilemap;
+		public Tilemap OverlayTilemap;
 	}
 }
