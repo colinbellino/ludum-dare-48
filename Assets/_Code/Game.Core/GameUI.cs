@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Game.Core
@@ -68,6 +69,10 @@ namespace Game.Core
 		public async UniTask ShowVictory()
 		{
 			await FadeInPanel(_victoryPanel, _victoryText, 0.5f);
+
+			EventSystem.current.SetSelectedGameObject(null);
+			await UniTask.NextFrame();
+			EventSystem.current.SetSelectedGameObject(VictoryButton1.gameObject);
 		}
 		public async UniTask HideVictory(float duration = 0.5f)
 		{
@@ -77,6 +82,10 @@ namespace Game.Core
 		public async UniTask ShowDefeat()
 		{
 			await FadeInPanel(_defeatPanel, _defeatText, 0.5f);
+
+			EventSystem.current.SetSelectedGameObject(null);
+			await UniTask.NextFrame();
+			EventSystem.current.SetSelectedGameObject(DefeatButton1.gameObject);
 		}
 		public async UniTask HideDefeat(float duration = 0.5f)
 		{
