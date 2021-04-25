@@ -21,5 +21,6 @@ namespace Game.Core
 		[HideInInspector] public float NormalizedHorizontalSpeed = 0;
 		[HideInInspector] public float AnimationEndTimestamp;
 		[HideInInspector] public float StartDiggingTimestamp;
+		[HideInInspector] public Vector3Int DigDirection;
 	}
 }

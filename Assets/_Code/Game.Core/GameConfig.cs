@@ -23,7 +23,6 @@ namespace Game.Core
 		public AudioMixerSnapshot PauseAudioSnapshot;
 		[Range(0f, 1f)] public float MusicVolume = 1f;
 		[Range(0f, 1f)] public float SoundVolume = 1f;
-		public AudioClip MainMusic;
 		public AudioClip MenuTextAppearClip;
 		public AudioClip MenuConfirmClip;
 		public AudioClip[] DigClips;
