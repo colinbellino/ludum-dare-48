@@ -88,6 +88,7 @@ namespace Game.Core
 
 					if (entity.Controller.isGrounded && _cancelWasPressedThisFrame)
 					{
+						UnityEngine.Debug.Log("dig");
 						_level.PlatformTilemap.SetTile(digPosition, null);
 						entity.Animator?.Play(Animator.StringToHash("Dig"));
 					}
@@ -236,6 +237,8 @@ namespace Game.Core
 		{
 			_ = _audioPlayer.StopMusic(0.5f);
 			await _ui.FadeIn(Color.black);
+
+			_ = UnloadLevel(_state.CurrentLevel);
 
 			_machine.Fire(GameFSM.Triggers.Defeat);
 		}
