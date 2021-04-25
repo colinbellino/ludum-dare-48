@@ -40,6 +40,7 @@ namespace Game.Core
 
 			_camera.VirtualCamera.Follow = _state.Player.transform;
 			_camera.Confiner.m_BoundingShape2D = _level.CameraConfiner;
+			await UniTask.Delay(300); // Small delay so the initial camera follow is not visible
 
 			if (_state.CurrentLevel.Safe == false)
 			{
