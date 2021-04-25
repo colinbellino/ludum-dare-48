@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Game.Core.Utils;
 
 namespace Game.Core
@@ -20,6 +21,14 @@ namespace Game.Core
 			if (IsDevBuild())
 			{
 				_ui.ShowDebug();
+
+				for (int sceneIndex = 0; sceneIndex < SceneManager.sceneCount; sceneIndex++)
+				{
+					if (sceneIndex > 0)
+					{
+						await SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(sceneIndex).name);
+					}
+				}
 			}
 
 			Time.timeScale = 1f;
