@@ -13,7 +13,6 @@ namespace Game.Core
 		private bool _confirmWasPressedThisFrame;
 		private bool _cancelWasPressedThisFrame;
 		private LevelScene _level;
-		private Vector3Int _digDirection = new Vector3Int(0, -1, 0);
 
 		public GameplayState(GameFSM machine, Game game) : base(machine, game) { }
 
@@ -68,7 +67,7 @@ namespace Game.Core
 			{
 				if (Keyboard.current.f1Key.wasPressedThisFrame)
 				{
-					Victory();
+					_ = Victory();
 				}
 				if (Keyboard.current.f2Key.wasPressedThisFrame)
 				{
@@ -91,7 +90,7 @@ namespace Game.Core
 					var entity = _state.Player;
 
 					var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
-					var digPosition = entityPosition + _digDirection;
+					var digPosition = entityPosition + entity.DigDirection;
 
 					if (IsDevBuild())
 					{
@@ -118,6 +117,8 @@ namespace Game.Core
 							{
 								entity.Animator?.Play(Animator.StringToHash("Run"));
 							}
+
+							entity.DigDirection = new Vector3Int(1, 0, 0);
 						}
 						else if (moveInput.x < 0f)
 						{
@@ -131,6 +132,16 @@ namespace Game.Core
 							{
 								entity.Animator?.Play(Animator.StringToHash("Run"));
 							}
+
+							entity.DigDirection = new Vector3Int(-1, 0, 0);
+						}
+						else if (moveInput.y < 0f)
+						{
+							entity.DigDirection = new Vector3Int(0, -1, 0);
+						}
+						else if (moveInput.y > 0f)
+						{
+							entity.DigDirection = new Vector3Int(0, 1, 0);
 						}
 						else
 						{
@@ -139,6 +150,15 @@ namespace Game.Core
 							if (entity.Controller.isGrounded)
 							{
 								entity.Animator?.Play(Animator.StringToHash("Idle"));
+							}
+
+							if (entity.transform.localScale.x > 0)
+							{
+								entity.DigDirection = new Vector3Int(1, 0, 0);
+							}
+							else
+							{
+								entity.DigDirection = new Vector3Int(-1, 0, 0);
 							}
 						}
 
@@ -211,7 +231,7 @@ namespace Game.Core
 		private void DigTile(EntityComponent entity)
 		{
 			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
-			var digPosition = entityPosition + _digDirection;
+			var digPosition = entityPosition + entity.DigDirection;
 
 			var tile = _level.PlatformTilemap.GetTile(digPosition);
 			var tileData = GetTileData(_config.Tiles, tile);

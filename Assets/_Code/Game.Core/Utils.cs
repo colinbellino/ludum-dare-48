@@ -20,6 +20,7 @@ namespace Game.Core
 		{
 			var entity = GameObject.Instantiate(prefab, position, Quaternion.identity);
 			entity.transform.name = "Wall of Death";
+			entity.DigDirection = new Vector3Int(0, -1, 0);
 			// entity.StateMachine = new UnitStateMachine(false, game, entity);
 			// await entity.StateMachine.Start();
 			return entity;
