@@ -19,5 +19,7 @@ namespace Game.Core
 		[HideInInspector] public RaycastHit2D LastControllerColliderHit;
 		[HideInInspector] public Vector3 Velocity;
 		[HideInInspector] public float NormalizedHorizontalSpeed = 0;
+		[HideInInspector] public float AnimationEndTimestamp;
+		[HideInInspector] public float StartDiggingTimestamp;
 	}
 }

@@ -21,11 +21,13 @@ namespace Game.Core
 		public AudioMixerGroup SoundsAudioMixerGroup;
 		public AudioMixerSnapshot DefaultAudioSnapshot;
 		public AudioMixerSnapshot PauseAudioSnapshot;
+		[Range(0f, 1f)] public float MusicVolume = 1f;
+		[Range(0f, 1f)] public float SoundVolume = 1f;
 		public AudioClip MainMusic;
 		public AudioClip MenuTextAppearClip;
 		public AudioClip MenuConfirmClip;
-		[Range(0f, 1f)] public float MusicVolume = 1f;
-		[Range(0f, 1f)] public float SoundVolume = 1f;
+		public AudioClip[] DigClips;
+		public AudioClip[] ClingClips;
 	}
 
 	[Serializable]
