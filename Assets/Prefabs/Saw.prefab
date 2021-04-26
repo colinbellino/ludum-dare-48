@@ -173,13 +173,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2038083770683861233}
-  - component: {fileID: 2038083770683861234}
   - component: {fileID: -2534250066095687303}
+  - component: {fileID: 2038083770683861234}
   - component: {fileID: 1787497027965798843}
   - component: {fileID: 7740252584435824294}
   - component: {fileID: 4530394904239572593}
   - component: {fileID: 671061084719222790}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Saw
   m_TagString: Killbox
   m_Icon: {fileID: 0}
@@ -202,6 +202,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2534250066095687303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038083770683861232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b32a4c2b6ee44e49038a42c0a97d614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rigidbody: {fileID: 1787497027965798843}
+  Controller: {fileID: 7740252584435824294}
+  Animator: {fileID: 0}
+  Gravity: -25
+  RunSpeed: 1.2
+  GroundDamping: 20
+  InAirDamping: 5
+  JumpHeight: 3
+  BypassUnbreakable: 1
+  Velocity: {x: 0, y: 0, z: 0}
+  NormalizedHorizontalSpeed: 0
+  DigAnimationEndTimestamp: 0
+  StartDiggingTimestamp: 0
+  DigDirection: {x: 0, y: 0, z: 0}
 --- !u!61 &2038083770683861234
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -228,31 +254,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &-2534250066095687303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2038083770683861232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b32a4c2b6ee44e49038a42c0a97d614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 1787497027965798843}
-  Controller: {fileID: 7740252584435824294}
-  Animator: {fileID: 0}
-  Gravity: -25
-  RunSpeed: 1.2
-  GroundDamping: 20
-  InAirDamping: 5
-  JumpHeight: 3
-  Velocity: {x: 0, y: 0, z: 0}
-  NormalizedHorizontalSpeed: 0
-  DigAnimationEndTimestamp: 0
-  StartDiggingTimestamp: 0
-  DigDirection: {x: 0, y: 0, z: 0}
 --- !u!50 &1787497027965798843
 Rigidbody2D:
   serializedVersion: 4
@@ -293,7 +294,7 @@ MonoBehaviour:
     m_Bits: 0
   triggerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -455,13 +456,13 @@ GameObject:
   - component: {fileID: 8156925978340628283}
   - component: {fileID: 2473700424196895350}
   - component: {fileID: 8661175821841597048}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Impulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8156925978340628283
 Transform:
   m_ObjectHideFlags: 0

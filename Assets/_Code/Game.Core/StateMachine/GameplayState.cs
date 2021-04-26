@@ -46,13 +46,12 @@ namespace Game.Core
 			_camera.Confiner.m_BoundingShape2D = _level.CameraConfiner;
 			await UniTask.Delay(300); // Small delay so the initial camera follow is not visible
 
-			if (_state.CurrentLevel.Safe == false)
+			_state.Saws = new EntityComponent[_level.SawPositions.Length];
+			for (int sawIndex = 0; sawIndex < _level.SawPositions.Length; sawIndex++)
 			{
-				_state.Saws = new EntityComponent[_level.SawPositions.Length];
-				for (int sawIndex = 0; sawIndex < _level.SawPositions.Length; sawIndex++)
-				{
-					_state.Saws[sawIndex] = SpawnSaw(_config.WallOfDeathPrefab, sawIndex, _level.SawPositions[sawIndex]);
-				}
+				_state.Saws[sawIndex] = SpawnSaw(_config.WallOfDeathPrefab, sawIndex, _level.SawPositions[sawIndex]);
+				// _state.Saws[sawIndex].Controller.onTriggerEnterEvent += OnSawTriggerEnter(_state.Saws[sawIndex]);
+				// _state.Saws[sawIndex].Controller.onTriggerExitEvent += OnSawTriggerExit;
 			}
 
 			_controls.Gameplay.Enable();
@@ -89,6 +88,16 @@ namespace Game.Core
 				{
 					entity.Velocity.y = -entity.RunSpeed;
 					entity.Controller.move(entity.Velocity * Time.deltaTime);
+
+					var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
+					var digPosition = entityPosition + entity.DigDirection;
+					var tile = _level.PlatformTilemap.GetTile(digPosition);
+					var tileData = GetTileData(_config.Tiles, tile);
+
+					if (tileData != null)
+					{
+						SawDig(entity);
+					}
 				}
 
 				if (_state.Player != null)
@@ -202,7 +211,7 @@ namespace Game.Core
 					if (Time.time >= entity.StartDiggingTimestamp && entity.StartDiggingTimestamp > 0)
 					{
 						entity.StartDiggingTimestamp = 0;
-						DigTile(entity);
+						PlayerDig(entity);
 					}
 
 					// apply gravity before moving
@@ -239,7 +248,35 @@ namespace Game.Core
 			_controls.Gameplay.Cancel.started -= CancelStarted;
 		}
 
-		private async void DigTile(EntityComponent entity)
+		private async void SawDig(EntityComponent entity)
+		{
+			var width = new int[] { -2, -1, 0, 1, 2 };
+			var didDigTile = false;
+			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
+
+			foreach (var x in width)
+			{
+				var digPosition = entityPosition + entity.DigDirection + new Vector3Int(x, 0, 0);
+				var tile = _level.PlatformTilemap.GetTile(digPosition);
+
+				if (tile == null)
+				{
+					continue;
+				}
+
+				_level.PlatformTilemap.SetTile(digPosition, null);
+				SpawnEffect(_config.TileBreakEffectPrefab, digPosition + new Vector3(0.5f, 0.5f, 0f));
+				didDigTile = true;
+			}
+
+			if (didDigTile)
+			{
+				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, entityPosition + entity.DigDirection, 0.5f);
+				await Shake(1f, 200);
+			}
+		}
+
+		private async void PlayerDig(EntityComponent entity)
 		{
 			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
 			var digPosition = entityPosition + entity.DigDirection;
@@ -271,14 +308,14 @@ namespace Game.Core
 					SpawnEffect(_config.TileBreakEffectPrefab, digPosition + new Vector3(0.5f, 0.5f, 0f));
 				}
 
-				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips);
+				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, digPosition, 0.5f);
 				await Shake(1f, 200);
 			}
 			else
 			{
 				if (tile != null)
 				{
-					_ = _audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
+					_ = _audioPlayer.PlayRandomSoundEffect(_config.ClingClips, digPosition, 0.5f);
 					await Shake(1f, 200);
 				}
 			}
@@ -286,14 +323,12 @@ namespace Game.Core
 
 		private async UniTask Shake(float gain, int duration)
 		{
-			UnityEngine.Debug.Log("Shake");
 			var perlin = _camera.VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 			perlin.m_AmplitudeGain = gain;
 			Gamepad.current?.SetMotorSpeeds(gain / 8f, gain / 4f);
 
 			await UniTask.Delay(duration);
 
-			UnityEngine.Debug.Log("Shake end");
 			perlin.m_AmplitudeGain = 0f;
 			Gamepad.current?.SetMotorSpeeds(0f, 0f);
 		}
@@ -316,6 +351,27 @@ namespace Game.Core
 		{
 			// Debug.Log("OnPlayerTriggerExit: " + col.gameObject.name);
 		}
+
+		// private Action<Collider2D> OnSawTriggerEnter(EntityComponent entity)
+		// {
+		// 	return (Collider2D col) =>
+		// 	{
+		// 		var bla = col.ClosestPoint(entity.transform.position);
+		// 		Debug.Log("OnSawTriggerEnter: " + col.gameObject.name + "bla : " + bla);
+
+		// 		// var contacts = new ContactPoint2D[10];
+		// 		// col.GetContacts(contacts);
+		// 		// foreach (var contact in contacts)
+		// 		// {
+		// 		// 	Debug.Log("OnSawTriggerEnter: " + contact.point);
+		// 		// }
+		// 	};
+		// }
+
+		// private void OnSawTriggerExit(Collider2D col)
+		// {
+		// 	Debug.Log("OnSawTriggerExit: " + col.gameObject.name);
+		// }
 
 		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
 
