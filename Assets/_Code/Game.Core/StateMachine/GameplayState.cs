@@ -7,6 +7,7 @@ using System.Collections;
 using static Game.Core.Utils;
 using Cinemachine;
 using System;
+using System.Linq;
 
 namespace Game.Core
 {
@@ -35,6 +36,7 @@ namespace Game.Core
 			_level = await LoadLevel(_state.CurrentLevel);
 
 			_state.TileHits.Clear();
+			_state.Saws = new EntityComponent[0];
 
 			_state.Player = SpawnPlayer(_config.PlayerPrefab, _game, _level.PlayerStartPosition);
 			_state.Player.Controller.onTriggerEnterEvent += OnPlayerTriggerEnter;
@@ -46,7 +48,11 @@ namespace Game.Core
 
 			if (_state.CurrentLevel.Safe == false)
 			{
-				_state.WallOfDeath = SpawnWallOfDeath(_config.WallOfDeathPrefab, _game, _level.WallOfDeathStartPosition);
+				_state.Saws = new EntityComponent[_level.SawPositions.Length];
+				for (int sawIndex = 0; sawIndex < _level.SawPositions.Length; sawIndex++)
+				{
+					_state.Saws[sawIndex] = SpawnSaw(_config.WallOfDeathPrefab, sawIndex, _level.SawPositions[sawIndex]);
+				}
 			}
 
 			_controls.Gameplay.Enable();
@@ -79,10 +85,8 @@ namespace Game.Core
 
 			if (_state.Running)
 			{
-				if (_state.WallOfDeath != null)
+				foreach (var entity in _state.Saws)
 				{
-					var entity = _state.WallOfDeath;
-
 					entity.Velocity.y = -entity.RunSpeed;
 					entity.Controller.move(entity.Velocity * Time.deltaTime);
 				}
@@ -94,11 +98,11 @@ namespace Game.Core
 					var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
 					var digPosition = entityPosition + entity.DigDirection;
 
-					if (IsDevBuild())
-					{
-						GameObject.Find("Player Cursor").transform.position = entityPosition;
-						GameObject.Find("Dig Cursor").transform.position = digPosition;
-					}
+					// if (IsDevBuild())
+					// {
+					// 	GameObject.Find("Player Cursor").transform.position = entityPosition;
+					// 	GameObject.Find("Dig Cursor").transform.position = digPosition;
+					// }
 
 					if (entity.Controller.isGrounded)
 					{
@@ -225,9 +229,9 @@ namespace Game.Core
 
 			GameObject.Destroy(_state.Player.gameObject);
 
-			if (_state.WallOfDeath)
+			foreach (var entity in _state.Saws)
 			{
-				GameObject.Destroy(_state.WallOfDeath.gameObject);
+				GameObject.Destroy(entity.gameObject);
 			}
 
 			_controls.Gameplay.Disable();
@@ -235,7 +239,7 @@ namespace Game.Core
 			_controls.Gameplay.Cancel.started -= CancelStarted;
 		}
 
-		private void DigTile(EntityComponent entity)
+		private async void DigTile(EntityComponent entity)
 		{
 			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
 			var digPosition = entityPosition + entity.DigDirection;
@@ -267,29 +271,31 @@ namespace Game.Core
 					SpawnEffect(_config.TileBreakEffectPrefab, digPosition + new Vector3(0.5f, 0.5f, 0f));
 				}
 
-				_audioPlayer.PlayRandomSoundEffect(_config.DigClips);
-				_ = Shake(1f, 200);
+				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips);
+				await Shake(1f, 200);
 			}
 			else
 			{
 				if (tile != null)
 				{
-					_audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
-					_ = Shake(1f, 200);
+					_ = _audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
+					await Shake(1f, 200);
 				}
 			}
 		}
 
 		private async UniTask Shake(float gain, int duration)
 		{
+			UnityEngine.Debug.Log("Shake");
 			var perlin = _camera.VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 			perlin.m_AmplitudeGain = gain;
-			Gamepad.current.SetMotorSpeeds(gain / 8f, gain / 4f);
+			Gamepad.current?.SetMotorSpeeds(gain / 8f, gain / 4f);
 
 			await UniTask.Delay(duration);
 
+			UnityEngine.Debug.Log("Shake end");
 			perlin.m_AmplitudeGain = 0f;
-			Gamepad.current.SetMotorSpeeds(0f, 0f);
+			Gamepad.current?.SetMotorSpeeds(0f, 0f);
 		}
 
 		private async void OnPlayerTriggerEnter(Collider2D col)
@@ -354,7 +360,7 @@ namespace Game.Core
 
 			var level = new LevelScene();
 			level.PlayerStartPosition = GameObject.Find("Player Start").transform.position;
-			level.WallOfDeathStartPosition = data.WallOfDeathStartPosition;
+			level.SawPositions = GameObject.FindGameObjectsWithTag("SawSpawner").Select(gameObject => gameObject.transform.position).ToArray();
 			level.CameraConfiner = GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
 			level.PlatformTilemap = GameObject.Find("Platform").GetComponent<Tilemap>();
 			// Make sure we enable overlay layer (we disable it sometimes during level design)

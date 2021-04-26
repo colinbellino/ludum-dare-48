@@ -16,10 +16,10 @@ namespace Game.Core
 			return entity;
 		}
 
-		public static EntityComponent SpawnWallOfDeath(EntityComponent prefab, Game game, Vector3 position)
+		public static EntityComponent SpawnSaw(EntityComponent prefab, int index, Vector3 position)
 		{
 			var entity = GameObject.Instantiate(prefab, position, Quaternion.identity);
-			entity.transform.name = "Wall of Death";
+			entity.transform.name = "Saw " + index;
 			entity.DigDirection = new Vector3Int(0, -1, 0);
 			// entity.StateMachine = new UnitStateMachine(false, game, entity);
 			// await entity.StateMachine.Start();
