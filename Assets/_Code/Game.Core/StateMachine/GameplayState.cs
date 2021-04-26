@@ -218,6 +218,11 @@ namespace Game.Core
 						entity.Velocity.x = 0;
 					}
 
+					if (entity.Velocity.y < 0)
+					{
+						entity.Animator?.Play(Animator.StringToHash("Fall"));
+					}
+
 					if (Time.time >= entity.StartDiggingTimestamp && entity.StartDiggingTimestamp > 0)
 					{
 						entity.StartDiggingTimestamp = 0;
@@ -226,6 +231,7 @@ namespace Game.Core
 
 					// apply gravity before moving
 					entity.Velocity.y += entity.Gravity * Time.deltaTime;
+
 
 					entity.Controller.move(entity.Velocity * Time.deltaTime);
 
