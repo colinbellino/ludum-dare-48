@@ -762,12 +762,15 @@ MonoBehaviour:
   Controller: {fileID: 7740252584435824294}
   Animator: {fileID: 0}
   Gravity: -25
-  RunSpeed: 2
+  RunSpeed: 1.2
   GroundDamping: 20
   InAirDamping: 5
   JumpHeight: 3
   Velocity: {x: 0, y: 0, z: 0}
   NormalizedHorizontalSpeed: 0
+  AnimationEndTimestamp: 0
+  StartDiggingTimestamp: 0
+  DigDirection: {x: 0, y: 0, z: 0}
 --- !u!50 &1787497027965798843
 Rigidbody2D:
   serializedVersion: 4
