@@ -190,7 +190,7 @@ MonoBehaviour:
   JumpHeight: 2.2
   Velocity: {x: 0, y: 0, z: 0}
   NormalizedHorizontalSpeed: 0
-  AnimationEndTimestamp: 0
+  DigAnimationEndTimestamp: 0
   StartDiggingTimestamp: 0
   DigDirection: {x: 0, y: 0, z: 0}
 --- !u!61 &4993173109994224701
