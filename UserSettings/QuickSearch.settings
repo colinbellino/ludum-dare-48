@@ -16,7 +16,7 @@ filters = {
 	settings = true
 }
 scopes = {
-	"last_search.AB59B443" = "pla"
+	"last_search.AB59B443" = "main"
 }
 providers = {
 	asset = {
