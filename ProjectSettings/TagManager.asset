@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Killbox
   - Exit
+  - SawSpawner
   layers:
   - Default
   - TransparentFX
