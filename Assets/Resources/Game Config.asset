@@ -44,18 +44,18 @@ MonoBehaviour:
     WallOfDeathStartPosition: {x: 0, y: 12, z: 0}
     Safe: 0
   Tiles:
-  - Tile: {fileID: 0}
-    Breakable: 0
-    HitsToBreak: 0
   - Tile: {fileID: 11400000, guid: 4c6a97854c0d37441844edbe56e4ebdc, type: 2}
     Breakable: 0
     HitsToBreak: 0
-  - Tile: {fileID: 0}
-    Breakable: 1
-    HitsToBreak: 1
   - Tile: {fileID: 11400000, guid: c1307eae14c99b9479afb47da74819f4, type: 2}
     Breakable: 1
     HitsToBreak: 1
+  - Tile: {fileID: 11400000, guid: d5d80f35ada04964a88cb08577aca91e, type: 2}
+    Breakable: 1
+    HitsToBreak: 2
+  - Tile: {fileID: 11400000, guid: 91b98a6e7a1702047813b062b45941d0, type: 2}
+    Breakable: 1
+    HitsToBreak: 3
   DamageOverlays:
   - {fileID: 11400000, guid: e1a3f25c53872ea46ac46f8e06a904df, type: 2}
   - {fileID: 11400000, guid: 2cdaca25ca0dda64f90f78d520f7e4fc, type: 2}
