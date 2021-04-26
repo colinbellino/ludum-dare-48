@@ -340,7 +340,11 @@ namespace Game.Core
 			level.WallOfDeathStartPosition = data.WallOfDeathStartPosition;
 			level.CameraConfiner = GameObject.Find("Camera Confiner").GetComponent<Collider2D>();
 			level.PlatformTilemap = GameObject.Find("Platform").GetComponent<Tilemap>();
-			level.OverlayTilemap = GameObject.Find("Overlay").GetComponent<Tilemap>();
+			// Make sure we enable overlay layer (we disable it sometimes during level design)
+			var grid = GameObject.Find("Grid");
+			var overlay = grid.transform.Find("Overlay");
+			overlay.gameObject.SetActive(true);
+			level.OverlayTilemap = overlay.GetComponent<Tilemap>();
 
 			return level;
 		}
