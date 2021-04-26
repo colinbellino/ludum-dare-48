@@ -76,3 +76,4 @@ MonoBehaviour:
   ClingClips:
   - {fileID: 8300000, guid: 134869a3c0552574e8bb9d991631701c, type: 3}
   - {fileID: 8300000, guid: 44d3a2a02a26bda429fa8c8818a00e1a, type: 3}
+  TileBreakEffectPrefab: {fileID: 424922526298368555, guid: 78a118aa02bbe6c44a907806ca82989b, type: 3}

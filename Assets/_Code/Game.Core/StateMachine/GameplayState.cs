@@ -261,13 +261,17 @@ namespace Game.Core
 				if (_state.TileHits[digPosition] <= 0)
 				{
 					_level.PlatformTilemap.SetTile(digPosition, null);
+					SpawnEffect(_config.TileBreakEffectPrefab, digPosition + new Vector3(0.5f, 0.5f, 0f));
 				}
 
 				_audioPlayer.PlayRandomSoundEffect(_config.DigClips);
 			}
 			else
 			{
-				_audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
+				if (tile != null)
+				{
+					_audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
+				}
 			}
 		}
 

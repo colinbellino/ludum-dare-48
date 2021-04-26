@@ -26,6 +26,11 @@ namespace Game.Core
 			return entity;
 		}
 
+		public static ParticleSystem SpawnEffect(ParticleSystem effectPrefab, Vector3 position)
+		{
+			return GameObject.Instantiate(effectPrefab, position, Quaternion.identity);
+		}
+
 		public static TileData GetTileData(TileData[] tiles, TileBase tile)
 		{
 			for (int tileIndex = 0; tileIndex < tiles.Length; tileIndex++)
