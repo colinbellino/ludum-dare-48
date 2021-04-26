@@ -281,7 +281,8 @@ namespace Game.Core
 
 			if (didDigTile)
 			{
-				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, entityPosition + entity.DigDirection, 0.5f);
+				// TODO: play this sound only once even when there are multiple saws!
+				// _ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, entityPosition + entity.DigDirection, 0.5f);
 				await Shake(1f, 100);
 			}
 		}
@@ -391,7 +392,13 @@ namespace Game.Core
 
 		private async void Defeat()
 		{
-			_ = _audioPlayer.StopMusic(0.5f);
+			_state.Running = false;
+			_ = _audioPlayer.PlayRandomSoundEffect(_config.DeathClips, _state.Player.transform.position);
+			_state.Player.Animator?.Play(Animator.StringToHash("Death"));
+
+			await UniTask.Delay(500);
+
+			// _ = _audioPlayer.StopMusic(0.5f);
 			await _ui.FadeIn(Color.black);
 
 			_ = UnloadLevel(_state.CurrentLevel);

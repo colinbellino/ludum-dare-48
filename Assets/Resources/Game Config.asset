@@ -75,4 +75,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62a5aaf359310f04c88b2b56bb365bc0, type: 3}
   ClingClips:
   - {fileID: 8300000, guid: c35ef79f9adb46c4492aa7553324fd4d, type: 3}
+  DeathClips:
+  - {fileID: 8300000, guid: c86c6088a8eee664d9a2b4718092343c, type: 3}
+  - {fileID: 8300000, guid: 26299998302d18a4aaeaa9c75d1a8081, type: 3}
+  QuackClips:
+  - {fileID: 8300000, guid: b0e9abe817d14c247bc0973d6fa1671d, type: 3}
+  - {fileID: 8300000, guid: 5719627a0eee4044cb51710eb60439fe, type: 3}
+  - {fileID: 8300000, guid: 9d8ab6d5e7a8261428c0b1936d01e352, type: 3}
   TileBreakEffectPrefab: {fileID: 424922526298368555, guid: 78a118aa02bbe6c44a907806ca82989b, type: 3}
