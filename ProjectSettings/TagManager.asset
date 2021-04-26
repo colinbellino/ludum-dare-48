@@ -41,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 6393749
+    locked: 0
+  - name: MidGround
+    uniqueID: 2939033585
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -49,6 +55,9 @@ TagManager:
     locked: 0
   - name: SFX
     uniqueID: 995917501
+    locked: 0
+  - name: Foreground
+    uniqueID: 3359142719
     locked: 0
   - name: UI
     uniqueID: 2566642627
