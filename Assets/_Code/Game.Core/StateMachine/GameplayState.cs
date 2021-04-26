@@ -235,6 +235,7 @@ namespace Game.Core
 			_ui.HideGameplay();
 
 			_level = null;
+			_state.Running = false;
 
 			GameObject.Destroy(_state.Player.gameObject);
 
