@@ -103,7 +103,7 @@ namespace Game.Core
 						entity.Velocity.y = 0;
 					}
 
-					if (Time.time >= entity.AnimationEndTimestamp)
+					if (Time.time >= entity.DigAnimationEndTimestamp)
 					{
 						if (moveInput.x > 0f)
 						{
@@ -179,9 +179,17 @@ namespace Game.Core
 							{
 								entity.Animator?.Play(Animator.StringToHash("Dig Down"));
 								entity.StartDiggingTimestamp = Time.time + 0.2f;
-								entity.AnimationEndTimestamp = Time.time + 0.3f;
+								entity.DigAnimationEndTimestamp = Time.time + 0.3f;
 							}
 						}
+
+						// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+						var smoothedMovementFactor = entity.Controller.isGrounded ? entity.GroundDamping : entity.InAirDamping; // how fast do we change direction?
+						entity.Velocity.x = Mathf.Lerp(entity.Velocity.x, entity.NormalizedHorizontalSpeed * entity.RunSpeed, Time.deltaTime * smoothedMovementFactor);
+					}
+					else
+					{
+						entity.Velocity.x = 0;
 					}
 
 					if (Time.time >= entity.StartDiggingTimestamp && entity.StartDiggingTimestamp > 0)
@@ -189,10 +197,6 @@ namespace Game.Core
 						entity.StartDiggingTimestamp = 0;
 						DigTile(entity);
 					}
-
-					// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-					var smoothedMovementFactor = entity.Controller.isGrounded ? entity.GroundDamping : entity.InAirDamping; // how fast do we change direction?
-					entity.Velocity.x = Mathf.Lerp(entity.Velocity.x, entity.NormalizedHorizontalSpeed * entity.RunSpeed, Time.deltaTime * smoothedMovementFactor);
 
 					// apply gravity before moving
 					entity.Velocity.y += entity.Gravity * Time.deltaTime;
