@@ -240,6 +240,7 @@ namespace Game.Core
 			_ui.HideGameplay();
 
 			Gamepad.current?.SetMotorSpeeds(0f, 0f);
+			CinemachineImpulseManager.Instance.Clear();
 
 			_level = null;
 			_state.Running = false;
