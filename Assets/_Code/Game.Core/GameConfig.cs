@@ -27,6 +27,8 @@ namespace Game.Core
 		public AudioClip MenuConfirmClip;
 		public AudioClip[] DigClips;
 		public AudioClip[] ClingClips;
+		public AudioClip[] DeathClips;
+		public AudioClip[] QuackClips;
 
 		[Header("VFX")]
 		public ParticleSystem TileBreakEffectPrefab;
