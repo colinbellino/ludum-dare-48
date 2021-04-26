@@ -191,17 +191,18 @@ namespace Game.Core
 							var tile = _level.PlatformTilemap.GetTile(digPosition);
 							var tileData = GetTileData(_config.Tiles, tile);
 
-							if (tileData != null)
+							var animState = "Dig Side";
+							if (entity.DigDirection.y < 0)
 							{
-								var animState = "Dig Side";
-								if (entity.DigDirection.y < 0)
-								{
-									animState = "Dig Down";
-								}
-								entity.Animator?.Play(Animator.StringToHash(animState));
-								entity.StartDiggingTimestamp = Time.time + 0.2f;
-								entity.DigAnimationEndTimestamp = Time.time + 0.3f;
+								animState = "Dig Down";
 							}
+							else if (entity.DigDirection.y > 0)
+							{
+								animState = "Dig Up";
+							}
+							entity.Animator?.Play(Animator.StringToHash(animState));
+							entity.DigAnimationEndTimestamp = Time.time + 0.3f;
+							entity.StartDiggingTimestamp = Time.time + 0.2f;
 						}
 
 						// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
@@ -293,7 +294,7 @@ namespace Game.Core
 			var tile = _level.PlatformTilemap.GetTile(digPosition);
 			var tileData = GetTileData(_config.Tiles, tile);
 
-			if (tileData.Breakable)
+			if (tileData != null && tileData.Breakable)
 			{
 				if (_state.TileHits.ContainsKey(digPosition) == false)
 				{
