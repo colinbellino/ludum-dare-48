@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using System.Collections;
 using static Game.Core.Utils;
+using Cinemachine;
+using System;
 
 namespace Game.Core
 {
@@ -233,6 +235,14 @@ namespace Game.Core
 			_controls.Gameplay.Cancel.started -= CancelStarted;
 		}
 
+		private async UniTask Shake(float gain, float duration)
+		{
+			var perlin = _camera.VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+			perlin.m_AmplitudeGain = gain;
+			await UniTask.Delay(TimeSpan.FromMilliseconds(duration));
+			perlin.m_AmplitudeGain = 0f;
+		}
+
 		private void DigTile(EntityComponent entity)
 		{
 			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
@@ -266,12 +276,14 @@ namespace Game.Core
 				}
 
 				_audioPlayer.PlayRandomSoundEffect(_config.DigClips);
+				_ = Shake(1f, 0.1f);
 			}
 			else
 			{
 				if (tile != null)
 				{
 					_audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
+					_ = Shake(1f, 0.1f);
 				}
 			}
 		}
