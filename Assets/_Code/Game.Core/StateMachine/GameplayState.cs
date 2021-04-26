@@ -239,6 +239,8 @@ namespace Game.Core
 
 			_ui.HideGameplay();
 
+			Gamepad.current?.SetMotorSpeeds(0f, 0f);
+
 			_level = null;
 			_state.Running = false;
 
@@ -357,27 +359,6 @@ namespace Game.Core
 		{
 			// Debug.Log("OnPlayerTriggerExit: " + col.gameObject.name);
 		}
-
-		// private Action<Collider2D> OnSawTriggerEnter(EntityComponent entity)
-		// {
-		// 	return (Collider2D col) =>
-		// 	{
-		// 		var bla = col.ClosestPoint(entity.transform.position);
-		// 		Debug.Log("OnSawTriggerEnter: " + col.gameObject.name + "bla : " + bla);
-
-		// 		// var contacts = new ContactPoint2D[10];
-		// 		// col.GetContacts(contacts);
-		// 		// foreach (var contact in contacts)
-		// 		// {
-		// 		// 	Debug.Log("OnSawTriggerEnter: " + contact.point);
-		// 		// }
-		// 	};
-		// }
-
-		// private void OnSawTriggerExit(Collider2D col)
-		// {
-		// 	Debug.Log("OnSawTriggerExit: " + col.gameObject.name);
-		// }
 
 		private void ConfirmStarted(InputAction.CallbackContext context) => _confirmWasPressedThisFrame = true;
 
