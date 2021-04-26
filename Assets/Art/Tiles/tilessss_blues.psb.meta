@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: df3efd6e684bb314c8c3b056413786e9
+guid: b8c0ddd59bb0ec146acb2d76bc20e841
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,7 +102,7 @@ ScriptedImporter:
       y: 4
       width: 1793
       height: 2304
-    spriteID: 8c2d2bfe1d933fe448185c83c6f105a1
+    spriteID: 3104b532237b4fa4db50b72b1c070f57
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -136,7 +136,7 @@ ScriptedImporter:
     spriteName: Layer 3
     isGroup: 0
     parentIndex: -1
-    spriteID: 8c2d2bfe1d933fe448185c83c6f105a1
+    spriteID: 3104b532237b4fa4db50b72b1c070f57
     layerID: 20
     mosaicPosition: {x: 4, y: 4}
   characterData:
@@ -145,7 +145,7 @@ ScriptedImporter:
     dimension: {x: 0, y: 0}
     characterGroups: []
   generateGOHierarchy: 0
-  textureAssetName: tilessss Texture
-  prefabAssetName: tilessss Prefab
-  spriteLibAssetName: tilessss Sprite Lib
+  textureAssetName: tilessss_blues Texture
+  prefabAssetName: tilessss_blues Prefab
+  spriteLibAssetName: tilessss_blues Sprite Lib
   secondarySpriteTextures: []

@@ -60,7 +60,11 @@ namespace Game.Core
 
 			_state.Running = true;
 
-			_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music, true, 1f);
+			if (_audioPlayer.IsCurrentMusic(_state.CurrentLevel.Music) == false)
+			{
+				_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music, true, 1f);
+			}
+
 			await _ui.FadeOut();
 		}
 
@@ -74,7 +78,7 @@ namespace Game.Core
 			{
 				if (Keyboard.current.f1Key.wasPressedThisFrame)
 				{
-					_ = Victory();
+					Victory();
 				}
 				if (Keyboard.current.f2Key.wasPressedThisFrame)
 				{
@@ -354,7 +358,7 @@ namespace Game.Core
 			}
 			else if (col.gameObject.tag == "Exit")
 			{
-				await Victory();
+				Victory();
 			}
 		}
 
@@ -367,24 +371,24 @@ namespace Game.Core
 
 		private void CancelStarted(InputAction.CallbackContext context) => _cancelWasPressedThisFrame = true;
 
-		private async UniTask Victory()
+		private async void Victory()
 		{
 			var index = System.Array.IndexOf(_config.Levels, _state.CurrentLevel);
 			if (index < _config.Levels.Length - 1)
 			{
 				_ = _audioPlayer.StopMusic(1f);
 				await _ui.FadeIn(Color.black);
-				_ = UnloadLevel(_state.CurrentLevel);
-
-				_machine.Fire(GameFSM.Triggers.NextLevel);
+				await UnloadLevel(_state.CurrentLevel);
 
 				_state.CurrentLevel = _config.Levels[index + 1];
+
+				_machine.Fire(GameFSM.Triggers.NextLevel);
 			}
 			else
 			{
 				_ = _audioPlayer.StopMusic(1f);
 				await _ui.FadeIn(Color.white);
-				_ = UnloadLevel(_state.CurrentLevel);
+				await UnloadLevel(_state.CurrentLevel);
 
 				_machine.Fire(GameFSM.Triggers.Victory);
 			}
@@ -400,8 +404,7 @@ namespace Game.Core
 
 			// _ = _audioPlayer.StopMusic(0.5f);
 			await _ui.FadeIn(Color.black);
-
-			_ = UnloadLevel(_state.CurrentLevel);
+			await UnloadLevel(_state.CurrentLevel);
 
 			_machine.Fire(GameFSM.Triggers.Defeat);
 		}

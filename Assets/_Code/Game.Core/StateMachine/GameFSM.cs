@@ -37,7 +37,7 @@ namespace Game.Core
 
 			_machine.Configure(States.Gameplay)
 				.Permit(Triggers.Victory, States.Victory)
-				.Permit(Triggers.Defeat, States.Defeat)
+				.PermitReentry(Triggers.Defeat)
 				.PermitReentry(Triggers.NextLevel);
 
 			_machine.Configure(States.Victory)
