@@ -135,14 +135,6 @@ namespace Game.Core
 
 							entity.DigDirection = new Vector3Int(-1, 0, 0);
 						}
-						else if (moveInput.y < 0f)
-						{
-							entity.DigDirection = new Vector3Int(0, -1, 0);
-						}
-						else if (moveInput.y > 0f)
-						{
-							entity.DigDirection = new Vector3Int(0, 1, 0);
-						}
 						else
 						{
 							entity.NormalizedHorizontalSpeed = 0;
@@ -160,6 +152,15 @@ namespace Game.Core
 							{
 								entity.DigDirection = new Vector3Int(-1, 0, 0);
 							}
+						}
+
+						if (moveInput.y < 0f)
+						{
+							entity.DigDirection = new Vector3Int(0, -1, 0);
+						}
+						else if (moveInput.y > 0f)
+						{
+							entity.DigDirection = new Vector3Int(0, 1, 0);
 						}
 
 						// JUMP
