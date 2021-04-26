@@ -4,9 +4,9 @@ ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 2
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
   script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
   textureImporterSettings:
     alphaSource: 1
@@ -67,8 +67,8 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   spriteImportData:
-  - name:
-    originalName:
+  - name: 
+    originalName: 
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -78,13 +78,13 @@ ScriptedImporter:
       y: 0
       width: 0
       height: 0
-    spriteID:
+    spriteID: 
     internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
@@ -92,7 +92,7 @@ ScriptedImporter:
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: bulons
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -108,13 +108,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -1324, y: 6513}
   - name: OL_structure
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,13 +130,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -1296, y: 4115}
   - name: blade Copy 2
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,13 +152,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -892, y: 3104}
   - name: UL_structure
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,13 +174,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -689, y: 5359}
   - name: bulons_1
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,13 +196,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -1324, y: 6704}
   - name: OL_structure_1
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,13 +218,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -1296, y: 5408}
   - name: blade Copy 2_1
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,13 +240,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -835, y: 1425}
   - name: UL_structure_1
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,13 +262,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 355, y: -963}
   - name: bulons_2
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,13 +284,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -1324, y: 6803}
   - name: OL_structure_2
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,13 +306,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -517, y: 4115}
   - name: blade Copy 2_2
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,13 +328,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -810, y: -292}
   - name: UL_structure_2
-    originalName:
+    originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,7 +350,7 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices:
+    indices: 
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
@@ -369,16 +369,16 @@ ScriptedImporter:
     categories: []
   textureActualWidth: 4096
   textureActualHeight: 8192
-  spritePackingTag:
+  spritePackingTag: 
   resliceFromLayer: 0
   characterMode: 1
   mosaicPSDLayers: []
   rigPSDLayers:
   - name: A
-    spriteName:
+    spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID:
+    spriteID: 00000000000000000000000000000000
     layerID: 44
     mosaicPosition: {x: 0, y: 0}
   - name: bulons
@@ -410,10 +410,10 @@ ScriptedImporter:
     layerID: 12
     mosaicPosition: {x: 783, y: 6372}
   - name: B
-    spriteName:
+    spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID:
+    spriteID: 00000000000000000000000000000000
     layerID: 53
     mosaicPosition: {x: 0, y: 0}
   - name: bulons
@@ -445,10 +445,10 @@ ScriptedImporter:
     layerID: 47
     mosaicPosition: {x: 1827, y: 4}
   - name: C
-    spriteName:
+    spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID:
+    spriteID: 00000000000000000000000000000000
     layerID: 65
     mosaicPosition: {x: 0, y: 0}
   - name: bulons
