@@ -222,7 +222,6 @@ MonoBehaviour:
   GroundDamping: 20
   InAirDamping: 5
   JumpHeight: 3
-  BypassUnbreakable: 1
   Velocity: {x: 0, y: 0, z: 0}
   NormalizedHorizontalSpeed: 0
   DigAnimationEndTimestamp: 0
@@ -358,7 +357,7 @@ AudioSource:
   m_GameObject: {fileID: 2038083770683861232}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}
   m_audioClip: {fileID: 8300000, guid: 237916446f3a0164eb3c2c79fc6067d6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
