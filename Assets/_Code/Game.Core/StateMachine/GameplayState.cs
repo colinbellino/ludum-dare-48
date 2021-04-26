@@ -278,7 +278,7 @@ namespace Game.Core
 			if (didDigTile)
 			{
 				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, entityPosition + entity.DigDirection, 0.5f);
-				await Shake(1f, 200);
+				await Shake(1f, 100);
 			}
 		}
 
@@ -315,14 +315,14 @@ namespace Game.Core
 				}
 
 				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, digPosition, 0.5f);
-				await Shake(1f, 200);
+				await Shake(1f, 100);
 			}
 			else
 			{
 				if (tile != null)
 				{
 					_ = _audioPlayer.PlayRandomSoundEffect(_config.ClingClips, digPosition, 0.5f);
-					await Shake(1f, 200);
+					await Shake(1f, 100);
 				}
 			}
 		}
