@@ -27,21 +27,21 @@ namespace Game.Core
 		// 	}
 		// }
 
-		public UniTask PlayRandomSoundEffect(AudioClip[] clips)
+		public UniTask PlayRandomSoundEffect(AudioClip[] clips, Vector3 position, float volume = 1f)
 		{
 			var clip = clips[UnityEngine.Random.Range(0, clips.Length)];
-			return PlaySoundEffect(clip);
+			return PlaySoundEffect(clip, position, volume);
 		}
 
-		public UniTask PlaySoundEffect(AudioClip clip)
+		public UniTask PlaySoundEffect(AudioClip clip, float volume = 1f)
 		{
 			// Default to the center of the screen
-			return PlaySoundEffect(clip, Vector3.zero);
+			return PlaySoundEffect(clip, Vector3.zero, volume);
 		}
 
-		public UniTask PlaySoundEffect(AudioClip clip, Vector3 position)
+		public UniTask PlaySoundEffect(AudioClip clip, Vector3 position, float volume = 1f)
 		{
-			return PlaySoundClipAtPoint(clip, position);
+			return PlaySoundClipAtPoint(clip, position, volume);
 		}
 
 		public async UniTask PlayMusic(AudioClip clip, bool fromStart = true, float fadeDuration = 0f)
@@ -101,13 +101,14 @@ namespace Game.Core
 		}
 
 		// TODO: Use polling instead of creating game object each time
-		private UniTask PlaySoundClipAtPoint(AudioClip clip, Vector3 position)
+		private UniTask PlaySoundClipAtPoint(AudioClip clip, Vector3 position, float volume)
 		{
 			var gameObject = new GameObject("One shot audio");
 			gameObject.transform.position = position;
 			var audioSource = (AudioSource)gameObject.AddComponent(typeof(AudioSource));
 			audioSource.clip = clip;
 			audioSource.outputAudioMixerGroup = _config.SoundsAudioMixerGroup;
+			audioSource.volume = volume;
 			audioSource.Play();
 			UnityEngine.Object.Destroy(gameObject, clip.length * ((double)Time.timeScale < 0.00999999977648258 ? 0.01f : Time.timeScale));
 			return UniTask.Delay(TimeSpan.FromSeconds(clip.length));
