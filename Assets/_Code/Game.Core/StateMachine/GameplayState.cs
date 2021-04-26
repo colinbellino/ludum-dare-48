@@ -193,7 +193,12 @@ namespace Game.Core
 
 							if (tileData != null)
 							{
-								entity.Animator?.Play(Animator.StringToHash("Dig Down"));
+								var animState = "Dig Side";
+								if (entity.DigDirection.y < 0)
+								{
+									animState = "Dig Down";
+								}
+								entity.Animator?.Play(Animator.StringToHash(animState));
 								entity.StartDiggingTimestamp = Time.time + 0.2f;
 								entity.DigAnimationEndTimestamp = Time.time + 0.3f;
 							}
