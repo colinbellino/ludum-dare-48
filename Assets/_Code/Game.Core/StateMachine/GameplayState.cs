@@ -235,14 +235,6 @@ namespace Game.Core
 			_controls.Gameplay.Cancel.started -= CancelStarted;
 		}
 
-		private async UniTask Shake(float gain, float duration)
-		{
-			var perlin = _camera.VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-			perlin.m_AmplitudeGain = gain;
-			await UniTask.Delay(TimeSpan.FromMilliseconds(duration));
-			perlin.m_AmplitudeGain = 0f;
-		}
-
 		private void DigTile(EntityComponent entity)
 		{
 			var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
@@ -276,16 +268,28 @@ namespace Game.Core
 				}
 
 				_audioPlayer.PlayRandomSoundEffect(_config.DigClips);
-				_ = Shake(1f, 0.1f);
+				_ = Shake(1f, 200);
 			}
 			else
 			{
 				if (tile != null)
 				{
 					_audioPlayer.PlayRandomSoundEffect(_config.ClingClips);
-					_ = Shake(1f, 0.1f);
+					_ = Shake(1f, 200);
 				}
 			}
+		}
+
+		private async UniTask Shake(float gain, int duration)
+		{
+			var perlin = _camera.VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+			perlin.m_AmplitudeGain = gain;
+			Gamepad.current.SetMotorSpeeds(gain / 8f, gain / 4f);
+
+			await UniTask.Delay(duration);
+
+			perlin.m_AmplitudeGain = 0f;
+			Gamepad.current.SetMotorSpeeds(0f, 0f);
 		}
 
 		private async void OnPlayerTriggerEnter(Collider2D col)
