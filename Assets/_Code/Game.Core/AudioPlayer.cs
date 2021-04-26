@@ -27,6 +27,12 @@ namespace Game.Core
 		// 	}
 		// }
 
+		public UniTask PlayRandomSoundEffect(AudioClip[] clips)
+		{
+			var clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+			return PlaySoundEffect(clip);
+		}
+
 		public UniTask PlaySoundEffect(AudioClip clip)
 		{
 			// Default to the center of the screen
