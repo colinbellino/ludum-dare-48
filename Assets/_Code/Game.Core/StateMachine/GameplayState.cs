@@ -87,7 +87,10 @@ namespace Game.Core
 				}
 			}
 
-			if (Keyboard.current.escapeKey.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame)
+			if (
+				(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) ||
+				(Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
+			)
 			{
 				if (Time.timeScale == 0f)
 				{
@@ -95,6 +98,11 @@ namespace Game.Core
 					_state.Running = true;
 					_audioPlayer.ResumeMusic();
 					_ui.HidePause();
+
+					foreach (var entity in _state.Saws)
+					{
+						entity.AudioSource.UnPause();
+					}
 				}
 				else
 				{
@@ -102,6 +110,11 @@ namespace Game.Core
 					_state.Running = false;
 					_audioPlayer.PauseMusic();
 					_ui.ShowPause();
+
+					foreach (var entity in _state.Saws)
+					{
+						entity.AudioSource.Pause();
+					}
 				}
 			}
 
@@ -228,7 +241,6 @@ namespace Game.Core
 						if (_cancelWasPressedThisFrame && entity.Controller.isGrounded)
 						{
 							var tile = _level.PlatformTilemap.GetTile(digPosition);
-							var tileData = GetTileData(_config.Tiles, tile);
 
 							var animState = "Dig Side";
 							if (entity.DigDirection.y < 0)
@@ -364,14 +376,14 @@ namespace Game.Core
 					SpawnEffect(_config.TileBreakEffectPrefab, digPosition + new Vector3(0.5f, 0.5f, 0f));
 				}
 
-				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, digPosition, 0.5f);
+				_ = _audioPlayer.PlayRandomSoundEffect(_config.DigClips, digPosition, 0.6f);
 				await Shake(1f, 100);
 			}
 			else
 			{
 				if (tile != null)
 				{
-					_ = _audioPlayer.PlayRandomSoundEffect(_config.ClingClips, digPosition, 0.5f);
+					_ = _audioPlayer.PlayRandomSoundEffect(_config.ClingClips, digPosition, 0.7f);
 					await Shake(1f, 100);
 				}
 			}
@@ -438,7 +450,7 @@ namespace Game.Core
 		private async void Defeat()
 		{
 			_state.Running = false;
-			_ = _audioPlayer.PlayRandomSoundEffect(_config.DeathClips, _state.Player.transform.position);
+			_ = _audioPlayer.PlayRandomSoundEffect(_config.DeathClips, _state.Player.transform.position, 1.5f);
 			_state.Player.Animator?.Play(Animator.StringToHash("Death"));
 
 			await UniTask.Delay(500);
