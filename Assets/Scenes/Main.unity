@@ -1684,10 +1684,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You won!
+  m_text: 'You did it! Thanks so much for playing!
 
 
-    Restart ?'
+    Do you want to start again
+    from the beginning?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a2583f5df1103541a8f66916fe41fcd, type: 2}
   m_sharedMaterial: {fileID: -6066314340575914768, guid: 0a2583f5df1103541a8f66916fe41fcd, type: 2}
