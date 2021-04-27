@@ -15,6 +15,8 @@ namespace Game.Core
 		[SerializeField] private Text _debugText;
 		[Header("Gameplay")]
 		[SerializeField] private GameObject _gameplayRoot;
+		[Header("Pause")]
+		[SerializeField] private GameObject _pauseRoot;
 		[Header("Victory")]
 		[SerializeField] private Image _victoryPanel;
 		[SerializeField] private TMP_Text _victoryText;
@@ -41,6 +43,7 @@ namespace Game.Core
 		{
 			HideDebug();
 			HideGameplay();
+			HidePause();
 			_ = HideVictory(0f);
 			_ = HideDefeat(0f);
 
@@ -65,6 +68,8 @@ namespace Game.Core
 		public void ShowGameplay() { _gameplayRoot.SetActive(true); }
 		public void HideGameplay() { _gameplayRoot.SetActive(false); }
 
+		public void ShowPause() { _pauseRoot.SetActive(true); }
+		public void HidePause() { _pauseRoot.SetActive(false); }
 
 		public async UniTask ShowVictory()
 		{
