@@ -217,6 +217,7 @@ MonoBehaviour:
   Rigidbody: {fileID: 1787497027965798843}
   Controller: {fileID: 7740252584435824294}
   Animator: {fileID: 0}
+  AudioSource: {fileID: 671061084719222790}
   Gravity: -25
   RunSpeed: 1.2
   GroundDamping: 20
@@ -360,7 +361,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3053297684183750015, guid: c00711887b3714031932c58a1ac16396, type: 2}
   m_audioClip: {fileID: 8300000, guid: 237916446f3a0164eb3c2c79fc6067d6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0

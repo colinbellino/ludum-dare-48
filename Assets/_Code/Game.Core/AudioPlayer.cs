@@ -76,7 +76,7 @@ namespace Game.Core
 
 		public void ResumeMusic()
 		{
-			_musicSource.Play();
+			_musicSource.UnPause();
 		}
 
 		public async UniTask StopMusic(float fadeDuration = 0.5f)
