@@ -9,6 +9,7 @@ namespace Game.Core
 		[SerializeField] public Rigidbody2D Rigidbody;
 		[SerializeField] public CharacterController2D Controller;
 		[SerializeField] public Animator Animator;
+		[SerializeField] public AudioSource AudioSource;
 
 		[SerializeField] public float Gravity = -25f;
 		[SerializeField] public float RunSpeed = 8f;

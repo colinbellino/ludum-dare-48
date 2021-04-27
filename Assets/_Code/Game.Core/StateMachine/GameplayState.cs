@@ -16,6 +16,7 @@ namespace Game.Core
 		private bool _confirmWasPressedThisFrame;
 		private bool _cancelWasPressedThisFrame;
 		private LevelScene _level;
+		private float _stepSoundTimestamp;
 
 		public GameplayState(GameFSM machine, Game game) : base(machine, game) { }
 
@@ -135,6 +136,13 @@ namespace Game.Core
 							if (entity.Controller.isGrounded)
 							{
 								entity.Animator?.Play(Animator.StringToHash("Run"));
+								if (Time.time > _stepSoundTimestamp)
+								{
+									var clip = _config.FootstepClips[UnityEngine.Random.Range(0, _config.FootstepClips.Length)];
+									entity.AudioSource.clip = clip;
+									entity.AudioSource.Play();
+									_stepSoundTimestamp = Time.time + 0.2f;
+								}
 							}
 
 							entity.DigDirection = new Vector3Int(1, 0, 0);
@@ -150,6 +158,13 @@ namespace Game.Core
 							if (entity.Controller.isGrounded)
 							{
 								entity.Animator?.Play(Animator.StringToHash("Run"));
+								if (Time.time > _stepSoundTimestamp)
+								{
+									var clip = _config.FootstepClips[UnityEngine.Random.Range(0, _config.FootstepClips.Length)];
+									entity.AudioSource.clip = clip;
+									entity.AudioSource.Play();
+									_stepSoundTimestamp = Time.time + 0.2f;
+								}
 							}
 
 							entity.DigDirection = new Vector3Int(-1, 0, 0);
@@ -186,6 +201,7 @@ namespace Game.Core
 						if (_confirmWasPressedThisFrame && entity.Controller.isGrounded)
 						{
 							entity.Velocity.y = Mathf.Sqrt(2f * entity.JumpHeight * -entity.Gravity);
+							_audioPlayer.PlaySoundEffect(_config.JumpClip, entityPosition, 0.4f);
 							entity.Animator?.Play(Animator.StringToHash("Jump"));
 						}
 

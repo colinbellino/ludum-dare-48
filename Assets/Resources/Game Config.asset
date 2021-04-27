@@ -82,4 +82,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0e9abe817d14c247bc0973d6fa1671d, type: 3}
   - {fileID: 8300000, guid: 5719627a0eee4044cb51710eb60439fe, type: 3}
   - {fileID: 8300000, guid: 9d8ab6d5e7a8261428c0b1936d01e352, type: 3}
+  FootstepClips:
+  - {fileID: 8300000, guid: 35158c6023ac04b4b9afff545131da7a, type: 3}
+  - {fileID: 8300000, guid: f1806d3c6ec3a9d40a2dbf080c9ed9c2, type: 3}
+  - {fileID: 8300000, guid: da8dcd909099cd34585068d530fa421b, type: 3}
+  - {fileID: 8300000, guid: e5845bd3eb76ecd4995440cb6ddb353a, type: 3}
+  - {fileID: 8300000, guid: 87b9f715da87bda458ad8dc24b21b191, type: 3}
+  - {fileID: 8300000, guid: 2d0cdd9fd2a5c9a448be80bc4ce1a414, type: 3}
+  JumpClip: {fileID: 8300000, guid: 40a7ce0bd6789c04381df5bd02e08949, type: 3}
   TileBreakEffectPrefab: {fileID: 424922526298368555, guid: 78a118aa02bbe6c44a907806ca82989b, type: 3}
