@@ -8,6 +8,7 @@ using static Game.Core.Utils;
 using Cinemachine;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace Game.Core
 {
@@ -27,6 +28,8 @@ namespace Game.Core
 			await _ui.FadeIn(Color.black);
 
 			_ui.SetDebugText("State: Gameplay\n\n[DEBUG MENU]\n- F1: Jump to next level\n- F2: Trigger game over");
+			_ui.PauseButton1.onClick.AddListener(ToggleSounds);
+			_ui.PauseButton2.onClick.AddListener(ToggleMusic);
 
 			if (IsDevBuild() == false)
 			{
@@ -296,6 +299,8 @@ namespace Game.Core
 			await base.Exit();
 
 			_ui.HideGameplay();
+			_ui.PauseButton1.onClick.RemoveListener(ToggleSounds);
+			_ui.PauseButton2.onClick.RemoveListener(ToggleMusic);
 
 			Gamepad.current?.SetMotorSpeeds(0f, 0f);
 			CinemachineImpulseManager.Instance.Clear();
@@ -313,6 +318,18 @@ namespace Game.Core
 			_controls.Gameplay.Disable();
 			_controls.Gameplay.Confirm.started -= ConfirmStarted;
 			_controls.Gameplay.Cancel.started -= CancelStarted;
+		}
+
+		private void ToggleSounds()
+		{
+			_state.CurrentSoundVolume = (_state.CurrentSoundVolume == _state.InitialSoundVolume) ? 0f : _state.InitialSoundVolume;
+			_audioPlayer.SetSoundVolume(_state.CurrentSoundVolume);
+		}
+
+		private void ToggleMusic()
+		{
+			_state.CurrentMusicVolume = (_state.CurrentMusicVolume == _state.InitialMusicVolume) ? 0f : _state.InitialMusicVolume;
+			_audioPlayer.SetMusicVolume(_state.CurrentMusicVolume);
 		}
 
 		private async void SawDig(EntityComponent entity)

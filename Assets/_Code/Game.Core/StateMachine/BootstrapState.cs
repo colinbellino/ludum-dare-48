@@ -16,6 +16,9 @@ namespace Game.Core
 			_audioPlayer.SetMusicVolume(_config.MusicVolume);
 			_audioPlayer.SetSoundVolume(_config.SoundVolume);
 
+			_state.InitialMusicVolume = _state.CurrentMusicVolume = _config.MusicVolume;
+			_state.InitialSoundVolume = _state.CurrentSoundVolume = _config.SoundVolume;
+
 			_state.CurrentLevel = _config.Levels[0];
 
 			if (IsDevBuild())
