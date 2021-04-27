@@ -40,9 +40,10 @@ namespace Game.Core
 	public class Level
 	{
 		public string SceneName;
-		public AudioClip Music;
 		public Vector3 WallOfDeathStartPosition = new Vector3(0, 12f, 0);
 		public bool Safe;
+		public AudioClip Music;
+		[Range(0f, 1f)] public float MusicVolume = 1f;
 	}
 
 	[Serializable]
