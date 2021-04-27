@@ -69,6 +69,16 @@ namespace Game.Core
 			}
 		}
 
+		public void PauseMusic()
+		{
+			_musicSource.Pause();
+		}
+
+		public void ResumeMusic()
+		{
+			_musicSource.Play();
+		}
+
 		public async UniTask StopMusic(float fadeDuration = 0.5f)
 		{
 			await _musicSource.DOFade(0f, fadeDuration);

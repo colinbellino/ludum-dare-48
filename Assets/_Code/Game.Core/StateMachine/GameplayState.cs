@@ -87,8 +87,27 @@ namespace Game.Core
 				}
 			}
 
+			if (Keyboard.current.escapeKey.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame)
+			{
+				if (Time.timeScale == 0f)
+				{
+					Time.timeScale = 1f;
+					_state.Running = true;
+					_audioPlayer.ResumeMusic();
+					_ui.HidePause();
+				}
+				else
+				{
+					Time.timeScale = 0f;
+					_state.Running = false;
+					_audioPlayer.PauseMusic();
+					_ui.ShowPause();
+				}
+			}
+
 			if (_state.Running)
 			{
+
 				foreach (var entity in _state.Saws)
 				{
 					entity.Velocity.y = -entity.RunSpeed;
