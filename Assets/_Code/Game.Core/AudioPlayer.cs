@@ -44,7 +44,7 @@ namespace Game.Core
 			return PlaySoundClipAtPoint(clip, position, volume);
 		}
 
-		public async UniTask PlayMusic(AudioClip clip, bool fromStart = true, float fadeDuration = 0f)
+		public async UniTask PlayMusic(AudioClip clip, bool fromStart = true, float fadeDuration = 0f, float volume = 1f)
 		{
 			if (fromStart)
 			{
@@ -61,11 +61,11 @@ namespace Game.Core
 
 			if (fadeDuration > 0f)
 			{
-				await _musicSource.DOFade(1f, fadeDuration);
+				await _musicSource.DOFade(volume, fadeDuration);
 			}
 			else
 			{
-				_musicSource.volume = 1;
+				_musicSource.volume = volume;
 			}
 		}
 

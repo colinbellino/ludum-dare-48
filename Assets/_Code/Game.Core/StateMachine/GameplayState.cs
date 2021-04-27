@@ -63,7 +63,7 @@ namespace Game.Core
 
 			if (_audioPlayer.IsCurrentMusic(_state.CurrentLevel.Music) == false)
 			{
-				_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music, true, 1f);
+				_ = _audioPlayer.PlayMusic(_state.CurrentLevel.Music, true, 2f, _state.CurrentLevel.MusicVolume);
 			}
 
 			await _ui.FadeOut();
