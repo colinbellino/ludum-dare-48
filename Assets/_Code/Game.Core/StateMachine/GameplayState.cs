@@ -75,17 +75,17 @@ namespace Game.Core
 
 			var moveInput = _controls.Gameplay.Move.ReadValue<Vector2>();
 
-			if (IsDevBuild())
+			// if (IsDevBuild())
+			// {
+			if (Keyboard.current != null && Keyboard.current.shiftKey.isPressed && Keyboard.current.f1Key.wasPressedThisFrame)
 			{
-				if (Keyboard.current.f1Key.wasPressedThisFrame)
-				{
-					Victory();
-				}
-				if (Keyboard.current.f2Key.wasPressedThisFrame)
-				{
-					Defeat();
-				}
+				Victory();
 			}
+			if (Keyboard.current != null && Keyboard.current.shiftKey.isPressed && Keyboard.current.f2Key.wasPressedThisFrame)
+			{
+				Defeat();
+			}
+			// }
 
 			if (
 				(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) ||
