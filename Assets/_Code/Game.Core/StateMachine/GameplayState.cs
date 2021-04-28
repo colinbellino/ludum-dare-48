@@ -30,6 +30,7 @@ namespace Game.Core
 			_ui.SetDebugText("State: Gameplay\n\n[DEBUG MENU]\n- F1: Jump to next level\n- F2: Trigger game over");
 			_ui.PauseButton1.onClick.AddListener(ToggleSounds);
 			_ui.PauseButton2.onClick.AddListener(ToggleMusic);
+			_ui.PauseButton3.onClick.AddListener(ToggleScreenshake);
 
 			if (IsDevBuild() == false)
 			{
@@ -301,6 +302,7 @@ namespace Game.Core
 			_ui.HideGameplay();
 			_ui.PauseButton1.onClick.RemoveListener(ToggleSounds);
 			_ui.PauseButton2.onClick.RemoveListener(ToggleMusic);
+			_ui.PauseButton3.onClick.RemoveListener(ToggleScreenshake);
 
 			Gamepad.current?.SetMotorSpeeds(0f, 0f);
 			CinemachineImpulseManager.Instance.Clear();
@@ -322,14 +324,24 @@ namespace Game.Core
 
 		private void ToggleSounds()
 		{
-			_state.CurrentSoundVolume = (_state.CurrentSoundVolume == _state.InitialSoundVolume) ? 0f : _state.InitialSoundVolume;
+			var isOn = _state.CurrentSoundVolume == _state.InitialSoundVolume;
+			_state.CurrentSoundVolume = isOn ? 0f : _state.InitialSoundVolume;
 			_audioPlayer.SetSoundVolume(_state.CurrentSoundVolume);
+			_ui.PauseButton1.GetComponentInChildren<TMPro.TMP_Text>().text = "Sound: " + (isOn ? "OFF" : "ON");
 		}
 
 		private void ToggleMusic()
 		{
-			_state.CurrentMusicVolume = (_state.CurrentMusicVolume == _state.InitialMusicVolume) ? 0f : _state.InitialMusicVolume;
+			var isOn = _state.CurrentMusicVolume == _state.InitialMusicVolume;
+			_state.CurrentMusicVolume = isOn ? 0f : _state.InitialMusicVolume;
 			_audioPlayer.SetMusicVolume(_state.CurrentMusicVolume);
+			_ui.PauseButton2.GetComponentInChildren<TMPro.TMP_Text>().text = "Music: " + (isOn ? "OFF" : "ON");
+		}
+
+		private void ToggleScreenshake()
+		{
+			_state.EnableScreenshake = !_state.EnableScreenshake;
+			_ui.PauseButton3.GetComponentInChildren<TMPro.TMP_Text>().text = "Screenshake: " + (!_state.EnableScreenshake ? "OFF" : "ON");
 		}
 
 		private async void SawDig(EntityComponent entity)
@@ -408,6 +420,11 @@ namespace Game.Core
 
 		private async UniTask Shake(float gain, int duration)
 		{
+			if (_state.EnableScreenshake == false)
+			{
+				return;
+			}
+
 			var perlin = _camera.VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 			perlin.m_AmplitudeGain = gain;
 			Gamepad.current?.SetMotorSpeeds(gain / 8f, gain / 4f);
