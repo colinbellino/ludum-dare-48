@@ -55,9 +55,9 @@ namespace Game.Core
 			for (int sawIndex = 0; sawIndex < _level.SawPositions.Length; sawIndex++)
 			{
 				_state.Saws[sawIndex] = SpawnSaw(_config.WallOfDeathPrefab, sawIndex, _level.SawPositions[sawIndex]);
-				// _state.Saws[sawIndex].Controller.onTriggerEnterEvent += OnSawTriggerEnter(_state.Saws[sawIndex]);
-				// _state.Saws[sawIndex].Controller.onTriggerExitEvent += OnSawTriggerExit;
 			}
+
+			_camera.VirtualCamera.GetComponent<CinemachineImpulseListener>().enabled = _state.EnableScreenshake;
 
 			_controls.Gameplay.Enable();
 			_controls.Gameplay.Confirm.started += ConfirmStarted;
@@ -341,6 +341,7 @@ namespace Game.Core
 		private void ToggleScreenshake()
 		{
 			_state.EnableScreenshake = !_state.EnableScreenshake;
+			_camera.VirtualCamera.GetComponent<CinemachineImpulseListener>().enabled = _state.EnableScreenshake;
 			_ui.PauseButton3.GetComponentInChildren<TMPro.TMP_Text>().text = "Screenshake: " + (!_state.EnableScreenshake ? "OFF" : "ON");
 		}
 
