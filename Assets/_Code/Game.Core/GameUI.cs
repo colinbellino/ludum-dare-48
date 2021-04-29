@@ -74,7 +74,14 @@ namespace Game.Core
 		public void ShowGameplay() { _gameplayRoot.SetActive(true); }
 		public void HideGameplay() { _gameplayRoot.SetActive(false); }
 
-		public void ShowPause() { _pauseRoot.SetActive(true); }
+		public async void ShowPause()
+		{
+			_pauseRoot.SetActive(true);
+
+			EventSystem.current.SetSelectedGameObject(null);
+			await UniTask.NextFrame();
+			EventSystem.current.SetSelectedGameObject(PauseButton1.gameObject);
+		}
 		public void HidePause() { _pauseRoot.SetActive(false); }
 
 		public async UniTask ShowVictory()
