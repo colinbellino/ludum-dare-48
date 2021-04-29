@@ -31,6 +31,7 @@ namespace Game.Core
 			_ui.PauseButton1.onClick.AddListener(ToggleSounds);
 			_ui.PauseButton2.onClick.AddListener(ToggleMusic);
 			_ui.PauseButton3.onClick.AddListener(ToggleScreenshake);
+			_ui.PauseButton4.onClick.AddListener(ToggleAssistMode);
 
 			if (IsDevBuild() == false)
 			{
@@ -127,7 +128,14 @@ namespace Game.Core
 
 				foreach (var entity in _state.Saws)
 				{
-					entity.Velocity.y = -entity.RunSpeed;
+					if (_state.EnableAssistMode)
+					{
+						entity.Velocity.y = -entity.RunSpeed * 0.3f;
+					}
+					else
+					{
+						entity.Velocity.y = -entity.RunSpeed;
+					}
 					entity.Controller.move(entity.Velocity * Time.deltaTime);
 
 					var entityPosition = _level.PlatformTilemap.WorldToCell(entity.transform.position);
@@ -303,6 +311,7 @@ namespace Game.Core
 			_ui.PauseButton1.onClick.RemoveListener(ToggleSounds);
 			_ui.PauseButton2.onClick.RemoveListener(ToggleMusic);
 			_ui.PauseButton3.onClick.RemoveListener(ToggleScreenshake);
+			_ui.PauseButton4.onClick.RemoveListener(ToggleAssistMode);
 
 			Gamepad.current?.SetMotorSpeeds(0f, 0f);
 			CinemachineImpulseManager.Instance.Clear();
@@ -343,6 +352,12 @@ namespace Game.Core
 			_state.EnableScreenshake = !_state.EnableScreenshake;
 			_camera.VirtualCamera.GetComponent<CinemachineImpulseListener>().enabled = _state.EnableScreenshake;
 			_ui.PauseButton3.GetComponentInChildren<TMPro.TMP_Text>().text = "Screenshake: " + (!_state.EnableScreenshake ? "OFF" : "ON");
+		}
+
+		private void ToggleAssistMode()
+		{
+			_state.EnableAssistMode = !_state.EnableAssistMode;
+			_ui.PauseButton4.GetComponentInChildren<TMPro.TMP_Text>().text = "Assist mode: " + (!_state.EnableAssistMode ? "OFF" : "ON");
 		}
 
 		private async void SawDig(EntityComponent entity)

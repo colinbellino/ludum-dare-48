@@ -12,6 +12,7 @@ namespace Game.Core
 		public int GauntlerPower = 1;
 		public bool Running;
 		public bool EnableScreenshake = true;
+		public bool EnableAssistMode = false;
 		public float InitialMusicVolume;
 		public float CurrentMusicVolume;
 		public float InitialSoundVolume;

@@ -20,6 +20,7 @@ namespace Game.Core
 		[SerializeField] public Button PauseButton1;
 		[SerializeField] public Button PauseButton2;
 		[SerializeField] public Button PauseButton3;
+		[SerializeField] public Button PauseButton4;
 		[Header("Victory")]
 		[SerializeField] private Image _victoryPanel;
 		[SerializeField] private TMP_Text _victoryText;
@@ -57,6 +58,7 @@ namespace Game.Core
 			PauseButton1.onClick.AddListener(PlayButtonClip);
 			PauseButton2.onClick.AddListener(PlayButtonClip);
 			PauseButton3.onClick.AddListener(PlayButtonClip);
+			PauseButton4.onClick.AddListener(PlayButtonClip);
 		}
 
 		private void PlayButtonClip()
