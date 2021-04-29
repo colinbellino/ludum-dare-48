@@ -4,9 +4,9 @@ ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 2
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:
   script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
   textureImporterSettings:
     alphaSource: 1
@@ -27,20 +27,20 @@ ScriptedImporter:
     vTOnly: 0
     nPOTScale: 1
     sRGBTexture: 1
-    spriteMode: 2
+    spriteMode: 1
     spriteExtrude: 1
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
-    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spritePixelsToUnits: 1024
+    spriteBorder: {x: 0, y: 1282, z: 0, w: 4}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
     cubemapConvolution: 0
     seamlessCubemap: 0
     alphaIsTransparency: 1
     spriteTessellationDetail: -1
-    textureType: 8
+    textureType: 0
     textureShape: 1
     singleChannelComponent: 0
     flipbookRows: 0
@@ -67,24 +67,24 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   spriteImportData:
-  - name: 
-    originalName: 
-    pivot: {x: 0, y: 0}
+  - name: BG_Wood_1
+    originalName:
+    pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 1282, z: 0, w: 4}
     rect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 0
-      height: 0
-    spriteID: 
+      width: 1024
+      height: 2048
+    spriteID: e9978638ad6c54026818ce0e1e6fbc41
     internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices: 
+    indices:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
@@ -92,7 +92,7 @@ ScriptedImporter:
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: Layer 7
-    originalName: 
+    originalName:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -108,13 +108,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices: 
+    indices:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: -497}
   - name: Layer 10 Copy 2
-    originalName: 
+    originalName:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,13 +130,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices: 
+    indices:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: -1274}
   - name: Layer 4
-    originalName: 
+    originalName:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,13 +152,13 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices: 
+    indices:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: 875}
   - name: Layer 6
-    originalName: 
+    originalName:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,26 +174,59 @@ ScriptedImporter:
     spriteOutline: []
     vertices: []
     spritePhysicsOutline: []
-    indices: 
+    indices:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: 280}
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   mosaicLayers: 1
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 1024
-  importedTextureHeight: 2048
+  importedTextureWidth: 256
+  importedTextureHeight: 512
   documentSize: {x: 1024, y: 2048}
   paperDollMode: 0
   keepDupilcateSpriteName: 0
   spriteCategoryList:
     categories: []
-  textureActualWidth: 2048
-  textureActualHeight: 4096
-  spritePackingTag: 
+  textureActualWidth: 1024
+  textureActualHeight: 2048
+  spritePackingTag:
   resliceFromLayer: 0
   characterMode: 1
   mosaicPSDLayers: []
