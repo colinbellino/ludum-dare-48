@@ -4,6 +4,8 @@ This game is our submission for Ludum Dare 48, code and art assets are still ver
 
 **Jump and dig your way through challenging levels and avoid death from above.**
 
+Play at: https://colinbellino.itch.io/bonbon
+
 ## Credits:
 
 - **Art:** Laura De Pascale (https://www.lauradp.work | https://twitter.com/la_depas)
@@ -18,3 +20,5 @@ This game is our submission for Ludum Dare 48, code and art assets are still ver
 | Jump    | Space, Enter or Up arrow        | X or Square button (▢) |
 | Dig     | E, Shift, or Down arrow         | A or Cross button (X)  |
 | Pause   | Escape                          | Start button           |
+
+![CKFp26](https://user-images.githubusercontent.com/622180/128102134-ee783f11-ae7e-4935-874a-5ec859bc5a39.png)
